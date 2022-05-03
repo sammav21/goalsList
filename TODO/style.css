@@ -1,0 +1,118 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+    background-image: linear-gradient(230deg, #558B6E, #E0EDC5);
+    font-family: 'Poiret One', cursive;
+}
+
+header,form, .list-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header{
+    font-size: 3rem;
+    height: 35vh;
+    color:#4B5C4E;
+}
+
+form{
+    border-top: #558B6E solid 1px;
+    padding: 10px;
+    border-radius: 50px;
+    margin: auto;
+    width: 500px;
+}
+
+.input-section{
+    background-color: none;
+    border: solid 1px #E0EDC5;
+    border-radius: 50px;
+    padding-left: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input,button{
+    border: none;
+}
+
+#add{
+    font-size: 19px;
+    color: #558B6E;
+}
+
+input{
+    width: 300px;
+    height: 50px;
+    outline: none;
+    background-color: transparent;
+}
+.add{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #E0EDC5;
+}
+
+.add:hover{
+    cursor: pointer;
+}
+
+
+.list{
+    width: 500px;
+    height: inherit;
+    margin: 20px;
+    padding-bottom: 30px;
+    border: solid 1px #558B6E;
+    border-top: none;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.listDiv{
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+}
+
+li{
+    font-size: 30px;
+    list-style: none;
+    flex: 1;
+}
+
+.list-button{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 20px;
+    background-color: #E0EDC5;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
