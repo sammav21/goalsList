@@ -146,7 +146,53 @@ li{
 }
 
 
-.completedItem .remove, .completedItem .details{
+.completedItem .remove, .completedItem .closed{
     pointer-events: none;
     color: #558B6E;
+}
+
+.details-div{
+    width: 400px;
+    height: 200px;
+    background-color: #4B5C4E;;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.why-div{
+    height: 80px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.whyPrompt{
+    color: #E0EDC5;
+    font-size: 23px;
+}
+
+.whyInput{
+    background-color: #E0EDC5;
+    border: solid 1px #E0EDC5;
+    border-radius: 70px;
+    margin-top: 5px;
+    width: 300px; /*find a why to make this a text box instead of one line */
+    color: #4B5C4E;
+    font-family: 'Poiret One', cursive;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.stones-div{
+    height: 50px;
+    width: inherit;
+    
+}
+
+.deadline-div{
+    height: 50px;
+    width: inherit;
 }

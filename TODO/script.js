@@ -7,7 +7,7 @@ const inputList = document.querySelector('.list');
 inputButton.addEventListener('click', createList);
 inputList.addEventListener('click', deleteRow);
 inputList.addEventListener('click', completeRow);
-inputList.addEventListener('click', details);
+inputList.addEventListener('click', openDetails);
 
 function createList(event){
     event.preventDefault();
@@ -29,7 +29,7 @@ function createList(event){
     const detailsButton = document.createElement('button');
     detailsButton.innerHTML = '<i class="fa-solid fa-caret-down" id="details"></i>';
     detailsButton.classList.add('list-button')
-    detailsButton.classList.add('details');
+    detailsButton.classList.add('closed');
     listDiv.appendChild(detailsButton);
 
     const checkButton = document.createElement('button');
@@ -68,6 +68,57 @@ function completeRow(e){
     }
 
 }
+
+
+
+
+function openDetails(e){
+    const detailsButton = e.target;
+
+    const detailsDiv = document.createElement('div');
+    detailsDiv.classList.add('details-div');
+
+    const why = document.createElement('div');
+    why.classList.add('why-div');
+    const whyPrompt = document.createElement('p');
+    whyPrompt.classList.add('whyPrompt');
+    whyPrompt.innerText = 'This goal is important to me because...';
+    why.appendChild(whyPrompt);
+    const whyInput = document.createElement('input');
+    whyInput.type = 'text';
+    whyInput.classList.add('whyInput');
+    why.appendChild(whyInput);
+
+    const steppingStones = document.createElement('div');
+    steppingStones.classList.add('stones-div');
+    const deadline = document.createElement('div');
+    deadline.classList.add('deadline-div');
+    detailsDiv.appendChild(why);
+    detailsDiv.appendChild(steppingStones);
+    detailsDiv.appendChild(deadline);
+    const listItem = detailsButton.closest('div');
+
+if (detailsButton.classList[1] ==='closed'){
+    detailsButton.classList.remove('closed'); 
+    detailsButton.classList.add('open');
+    listItem.after(detailsDiv);
+} 
+else if(detailsButton.classList[1] === 'open'){
+    detailsButton.classList.remove('open'); 
+    detailsButton.classList.add('closed');
+    let nextDiv = listItem.nextElementSibling;
+    nextDiv.style.display = 'none';
+}
+}
+
+
+
+//this open/close issue with details might need a 3rd form so that the open adn close aren't being clicked at the same time. So maybe a third class option to serve as neutral ground
+
+
+
+
+
 
 //Create buttons for check, delete, and details
 //Also figure out how to make items movable (drag/drop) depending on importance
