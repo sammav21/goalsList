@@ -7,7 +7,7 @@ const inputList = document.querySelector('.list');
 inputButton.addEventListener('click', createList);
 inputList.addEventListener('click', deleteRow);
 inputList.addEventListener('click', completeRow);
-inputList.addEventListener('click', openDetails);
+inputList.addEventListener('click', details);
 
 function createList(event){
     event.preventDefault();
@@ -28,31 +28,147 @@ function createList(event){
 
     const detailsButton = document.createElement('button');
     detailsButton.innerHTML = '<i class="fa-solid fa-caret-down" id="details"></i>';
-    detailsButton.classList.add('list-button')
+    detailsButton.classList.add('listButton')
     detailsButton.classList.add('closed');
     listDiv.appendChild(detailsButton);
 
     const checkButton = document.createElement('button');
     checkButton.innerHTML = '<i class="fa-solid fa-check"id="check"></i>';
-    checkButton.classList.add('list-button');
+    checkButton.classList.add('listButton');
     checkButton.classList.add('check');
     listDiv.appendChild(checkButton);
 
     const removeButton = document.createElement('button');
     removeButton.innerHTML = '<i class="fa-solid fa-minus" id="remove"></i>';
-    removeButton.classList.add('list-button');
+    removeButton.classList.add('listButton');
     removeButton.classList.add('remove');
     listDiv.appendChild(removeButton);
+
+    /*Below I create the drop down div for the details section. Including it here ensures it only happens once per new input */
+    const detailsDiv = document.createElement('div');
+    detailsDiv.classList.add('detailsDiv');
+    detailsDiv.style.display = 'none';
+    inputList.appendChild(detailsDiv);
+
+    const why = document.createElement('div');
+    why.classList.add('why-div');
+    const whyPrompt = document.createElement('p');
+    whyPrompt.innerText = 'This goal is important to me because...';
+    why.appendChild(whyPrompt);
+    const whyInput = document.createElement('div');
+    whyInput.classList.add('whyInput');
+    why.appendChild(whyInput);
+    const whyText = document.createElement('textarea');
+    whyText.maxLength = '150';
+    whyText.classList.add('whyText');
+    whyInput.appendChild(whyText);
+    const whyAdd = document.createElement('i');
+    whyAdd.innerHTML = '<i class="fa-thin fa-plus" id="whyAdd">';
+    whyInput.appendChild(whyAdd);
+
+    whyAdd.addEventListener('click', setReason);
+
+    function setReason(e){
+        e.preventDefault(); 
+        
+        if (whyAdd.classList[1] != 'active'){
+        whyInput.classList.toggle('setReasonDiv');
+        whyText.classList.toggle('setReason');
+        whyAdd.classList.toggle('active');
+        whyText.toggleAttribute('disabled');
+        
+        }
+    }
+
+
+    const miniGoals = document.createElement('div');
+    miniGoals.classList.add('miniGoals-div');
+    const miniPrompt = document.createElement('p');
+    miniPrompt.innerText = 'mini goals needed';
+    miniGoals.appendChild(miniPrompt);
+    const test = document.createElement('ul')
+    const miniInput = document.createElement('div');
+    miniInput.classList.add('miniInput');
+    miniGoals.appendChild(miniInput);
+    const miniText = document.createElement('input');
+    miniText.type = 'text';
+    miniText.classList.add('miniText');
+    miniInput.appendChild(miniText);
+    const miniAdd = document.createElement('i');
+    miniAdd.innerHTML = '<i class="fa-thin fa-plus" id="miniAdd">';
+    miniInput.appendChild(miniAdd);
+
+    miniAdd.addEventListener('click', createMiniList);
+
+    function createMiniList(event){
+        event.preventDefault();
+
+        if (miniText.value == ''){
+            return false;
+        } 
+
+        const miniListDiv = document.createElement('div');
+        miniListDiv.classList.add('miniListDiv');
+        miniGoals.appendChild(miniListDiv);
+
+        const miniInputItem = document.createElement('li');
+        miniInputItem.innerHTML = miniText.value;
+        miniInputItem.classList.add('miniListText');
+        miniListDiv.appendChild(miniInputItem);
+        miniText.value = '';
+
+        const miniCheckButton = document.createElement('button');
+        miniCheckButton.innerHTML = '<i class="fa-solid fa-check" id="miniCheck"></i>';
+        miniCheckButton.classList.add('miniListButton');
+        miniCheckButton.classList.add('miniCheck');
+        miniListDiv.appendChild(miniCheckButton);
+
+        const miniRemoveButton = document.createElement('button');
+        miniRemoveButton.innerHTML = '<i class="fa-solid fa-minus" id="miniRemove"></i>';
+        miniRemoveButton.classList.add('miniListButton');
+        miniRemoveButton.classList.add('miniRemove');
+        miniListDiv.appendChild(miniRemoveButton);
+    }
+
+    miniGoals.addEventListener('click', completeMini);
+    miniGoals.addEventListener('click', removeMini);
+
+    const hDeadline = document.createElement('div');
+    hDeadline.classList.add('hDeadline-div');
+    const hDeadlinePrompt = document.createElement('p');
+    hDeadlinePrompt.innerText = 'Hopeful Deadline:';
+    hDeadline.appendChild(hDeadlinePrompt);
+    const hInput = document.createElement('input');
+    hInput.type = 'date';
+    hInput.classList.add('hopefulInput');
+    hDeadline.appendChild(hInput);
+
+    const rDeadline = document.createElement('div');
+    rDeadline.classList.add('rDeadline-div');
+    const rDeadlinePrompt = document.createElement('p');
+    rDeadlinePrompt.innerText = 'Realistic Deadline:';
+    rDeadline.appendChild(rDeadlinePrompt);
+    const rInput = document.createElement('input');
+    rInput.type = 'date';
+    rInput.max = "4000-12-31";
+    rInput.classList.add('realisticInput');
+    rDeadline.appendChild(rInput);
+
+
+    detailsDiv.appendChild(why);
+    detailsDiv.appendChild(miniGoals);
+    detailsDiv.appendChild(hDeadline);
+    detailsDiv.appendChild(rDeadline);
 }
-
-
 
 function deleteRow(e){
     const removeButton = e.target;
 
     if (removeButton.classList[1] === 'remove'){
         const listItem = removeButton.closest('div');
+        const detailItem = listItem.nextElementSibling;        
         listItem.remove();
+        detailItem.remove();
     }
 }
 
@@ -64,61 +180,53 @@ function completeRow(e){
         const checkButton = completeButton.querySelector('#check');
         listItem.classList.toggle('completedItem');
         checkButton.classList.toggle('completedButton');  
-
     }
-
 }
 
-
-
-
-function openDetails(e){
+function details(e){
     const detailsButton = e.target;
+    const detailsDiv = document.querySelector('.detailsDiv');
 
-    const detailsDiv = document.createElement('div');
-    detailsDiv.classList.add('details-div');
-
-    const why = document.createElement('div');
-    why.classList.add('why-div');
-    const whyPrompt = document.createElement('p');
-    whyPrompt.classList.add('whyPrompt');
-    whyPrompt.innerText = 'This goal is important to me because...';
-    why.appendChild(whyPrompt);
-    const whyInput = document.createElement('input');
-    whyInput.type = 'text';
-    whyInput.classList.add('whyInput');
-    why.appendChild(whyInput);
-
-    const steppingStones = document.createElement('div');
-    steppingStones.classList.add('stones-div');
-    const deadline = document.createElement('div');
-    deadline.classList.add('deadline-div');
-    detailsDiv.appendChild(why);
-    detailsDiv.appendChild(steppingStones);
-    detailsDiv.appendChild(deadline);
     const listItem = detailsButton.closest('div');
+    const connectedDiv = listItem.nextElementSibling;
 
-if (detailsButton.classList[1] ==='closed'){
-    detailsButton.classList.remove('closed'); 
-    detailsButton.classList.add('open');
-    listItem.after(detailsDiv);
-} 
-else if(detailsButton.classList[1] === 'open'){
-    detailsButton.classList.remove('open'); 
-    detailsButton.classList.add('closed');
-    let nextDiv = listItem.nextElementSibling;
-    nextDiv.style.display = 'none';
+    if (detailsButton.classList[1] === 'closed'){
+        detailsButton.classList.remove('closed'); 
+        detailsButton.classList.add('open');
+        connectedDiv.style.display = 'block';
+        
+    }
+    else if (detailsButton.classList[1] === 'open'){
+        detailsButton.classList.remove('open'); 
+        detailsButton.classList.add('closed');
+        connectedDiv.style.display = 'none';
+    }
 }
+
+function removeMini(e){
+    const removeButton = e.target;
+
+    if (removeButton.classList[1] === 'miniRemove'){
+        const listItem = removeButton.closest('div');      
+        listItem.remove();
+       
+    }
 }
+
+for (var x = 0; x<3; x++){
+function completeMini(e){
+        const miniCompleteButton = e.target;
+        if (miniCompleteButton.classList[1] === 'miniCheck'){
+            const miniListItem = miniCompleteButton.closest('div')
+            const miniCheckButton = miniCompleteButton.querySelector('#miniCheck');
+            miniListItem.classList.toggle('miniCompletedItem');
+            miniCheckButton.classList.toggle('miniCompletedButton');  
+        }
+    }
+}
+
 
 
 
 //this open/close issue with details might need a 3rd form so that the open adn close aren't being clicked at the same time. So maybe a third class option to serve as neutral ground
 
-
-
-
-
-
-//Create buttons for check, delete, and details
-//Also figure out how to make items movable (drag/drop) depending on importance

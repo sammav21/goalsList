@@ -10,6 +10,8 @@ body{
     font-family: 'Poiret One', cursive;
 }
 
+
+
 header,form, .list-section{
     display: flex;
     justify-content: center;
@@ -19,7 +21,9 @@ header{
     font-size: 3rem;
     height: 35vh;
     color:#4B5C4E;
+    text-shadow: -1px 0px #E0EDC5;
 }
+
 
 form{
     border-top: #558B6E solid 1px;
@@ -53,7 +57,12 @@ input{
     height: 50px;
     outline: none;
     background-color: transparent;
+    color: #4B5C4E;
+    font-family: 'Poiret One', cursive;
+    font-weight: 800;
+    font-size: 23px;
 }
+
 .add{
     width: 50px;
     height: 50px;
@@ -65,6 +74,8 @@ input{
     cursor: pointer;
 }
 
+
+/*growing list section */
 .list-section{
     width: 500px;
     min-height: 100px;
@@ -105,7 +116,7 @@ li{
     margin: 0 0 0 5px;   
 }
 
-.list-button{
+.listButton, .miniListButton{
     width: 25px;
     height: 25px;
     margin: 2px;
@@ -114,7 +125,7 @@ li{
     color: #4B5C4E;
 }
 
-.list-button:hover{
+.listButton:hover, .miniListButton:hover{
     cursor: pointer;
     background-color: #E0EDC5;
     border-radius: 50%;
@@ -122,7 +133,7 @@ li{
 }
 
 
-#check, #remove, #details{
+#check, #remove, #details, #miniCheck, #miniRemove{
     pointer-events: none; 
 }
 
@@ -151,48 +162,193 @@ li{
     color: #558B6E;
 }
 
-.details-div{
+
+.detailsDiv{
     width: 400px;
-    height: 200px;
+    margin: 5px;
     background-color: #4B5C4E;;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 10px;
+    color: #E0EDC5;
+    font-size: 23px;
+    box-shadow: 6px 6px #3b483d;
 }
 
-.why-div{
-    height: 80px;
+.why-div, .miniGoals-div{
     width: 400px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items:flex-start;
+    margin: 8px 0 0 20px;
 }
 
-.whyPrompt{
-    color: #E0EDC5;
-    font-size: 23px;
+
+.miniInput, .whyInput{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #E0EDC5;
+    width: 365px;
+    margin-top: 5px;
+    border-radius: 8px;
 }
 
 .whyInput{
+    height: 75px
+}
+.miniInput{
+    height: 40px;
+}
+
+.whyText, .miniText{
+    background: none;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Poiret One', cursive;
+    color: #3b483d;
+    width: 350px;
+    height: inherit;
+    padding-left: 8px;
+}
+
+textarea{
+    overflow:hidden;
+    border: none;
+    outline: none;
+    resize: none;
+}
+
+.setReasonDiv{
+    outline: 1px solid #aabc85;
+    background-color: #aabc85;
+}
+.setReason{
+    background: #4B5C4E;
+    color: #E0EDC5;
+    overflow:auto;
+}
+
+.setReason::-webkit-scrollbar{
+    background-color: #4B5C4E;
+    width: 5px;
+}
+
+.setReason::-webkit-scrollbar-thumb{
     background-color: #E0EDC5;
-    border: solid 1px #E0EDC5;
-    border-radius: 70px;
-    margin-top: 5px;
-    width: 300px; /*find a why to make this a text box instead of one line */
+    height: 10px
+}
+
+.active{
+    color: blue;
+    transition: 1s;
+   transform: rotate(45deg); 
+}
+
+
+#miniAdd, #whyAdd{
+    font-weight: 600;
+    font-size: 30px;
     color: #4B5C4E;
+    cursor: pointer;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.miniListDiv{
+    width: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0 0 0;
+    color: #E0EDC5;
+    border-radius: 10px;
+}
+
+.miniListText{
+    overflow: hidden;
+    font-size: 20px;
+    font-weight: 500;
+    margin-left: 15px;
+}
+
+.miniListButton{
+    color: #E0EDC5;
+}
+
+.miniListButton:hover{
+    background-color: #3b483d;
+}
+
+.miniCompletedItem{
+    background-color: #aabc85;
+    color: #4B5C4E;
+    box-shadow: 3px 3px #8a996d;
+    transition: .2s;
+}
+
+.miniCompletedButton{
+        font-size: 22px;
+        color: #4B5C4E;
+        background-color: #aabc85;
+        padding: 2px 5px
+    }
+    
+    
+.miniCompletedItem .miniRemove{
+        pointer-events: none;
+        color: #aabc85;
+}
+
+
+.hDeadline-div, .rDeadline-div{
+    width: 400px;
+    display: flex;
+    justify-content:flex-start;
+    align-items: center; 
+    margin: 25px 0 0 25px;
+    white-space: nowrap;
+    font-size: 23px;
+}
+
+.rDeadline-div{
+    margin-bottom: 15px;
+}
+.hopefulInput, .realisticInput{
+    border-radius: 8px;
+    width: 170px; /*find a why to make this a text box instead of one line */
+    height: 35px;
+    color: #E0EDC5;
     font-family: 'Poiret One', cursive;
     font-weight: 600;
     font-size: 20px;
+    position: relative;
+    left: 20px;
+    cursor: pointer;
+    text-indent: 4px;
 }
 
-.stones-div{
-    height: 50px;
-    width: inherit;
-    
+.realisticInput{
+    left: 24px;
 }
 
-.deadline-div{
-    height: 50px;
-    width: inherit;
+input::-webkit-calendar-picker-indicator{
+    position: relative;
+    right: 3px;
+    background-color: #E0EDC5;
+    border-radius: 6px;
+
+}
+input::-webkit-calendar-picker-indicator:hover{
+    cursor: pointer;
+}
+
+input::-webkit-datetime-edit-day-field:focus,
+input::-webkit-datetime-edit-month-field:focus,
+input::-webkit-datetime-edit-year-field:focus {
+    background-color: #3b483d;
+    color: #E0EDC5;
+    border-radius: 3px;
 }
