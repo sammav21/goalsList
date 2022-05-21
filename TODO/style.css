@@ -108,7 +108,7 @@ input{
     color: #4B5C4E;
 }
 
-li{
+.list-text{
     font-size: 25px;
     font-weight: 600;
     list-style: none;
@@ -204,6 +204,7 @@ li{
 
 .whyText, .miniText{
     background: none;
+    outline: none;
     font-size: 20px;
     font-weight: 600;
     font-family: 'Poiret One', cursive;
@@ -216,7 +217,6 @@ li{
 textarea{
     overflow:hidden;
     border: none;
-    outline: none;
     resize: none;
 }
 
@@ -257,21 +257,28 @@ textarea{
     justify-content: center;
 }
 
-.miniListDiv{
+.miniList{
+    width: 370px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 5px 0 0 0;
+}
+
+.miniItemsContainer{
     width: 75%;
     display: flex;
-    justify-content: center;
     align-items: center;
+    border-radius: 5px;
     margin: 5px 0 0 0;
-    color: #E0EDC5;
-    border-radius: 10px;
 }
 
 .miniListText{
+    flex: 1;
     overflow: hidden;
-    font-size: 20px;
-    font-weight: 500;
-    margin-left: 15px;
+    font-size: 22px;
+    margin-left: 8px;
+   
 }
 
 .miniListButton{
@@ -308,7 +315,7 @@ textarea{
     display: flex;
     justify-content:flex-start;
     align-items: center; 
-    margin: 25px 0 0 25px;
+    margin: 15px 0 0 25px;
     white-space: nowrap;
     font-size: 23px;
 }

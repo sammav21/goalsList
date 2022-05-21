@@ -68,15 +68,18 @@ function createList(event){
 
     whyAdd.addEventListener('click', setReason);
 
-    function setReason(e){
-        e.preventDefault(); 
+    function setReason(event){
+        event.preventDefault(); 
         
-        if (whyAdd.classList[1] != 'active'){
+        if (whyText.value == ''){
+            return false;
+        }
+
+        else if (whyAdd.classList[1] != 'active'){
         whyInput.classList.toggle('setReasonDiv');
         whyText.classList.toggle('setReason');
         whyAdd.classList.toggle('active');
         whyText.toggleAttribute('disabled');
-        
         }
     }
 
@@ -86,7 +89,6 @@ function createList(event){
     const miniPrompt = document.createElement('p');
     miniPrompt.innerText = 'mini goals needed';
     miniGoals.appendChild(miniPrompt);
-    const test = document.createElement('ul')
     const miniInput = document.createElement('div');
     miniInput.classList.add('miniInput');
     miniGoals.appendChild(miniInput);
@@ -97,38 +99,41 @@ function createList(event){
     const miniAdd = document.createElement('i');
     miniAdd.innerHTML = '<i class="fa-thin fa-plus" id="miniAdd">';
     miniInput.appendChild(miniAdd);
+    const miniListDiv = document.createElement('ul');
+    miniListDiv.classList.add('miniList');
+    miniGoals.appendChild(miniListDiv);
 
     miniAdd.addEventListener('click', createMiniList);
 
     function createMiniList(event){
         event.preventDefault();
-
+        
         if (miniText.value == ''){
             return false;
         } 
 
-        const miniListDiv = document.createElement('div');
-        miniListDiv.classList.add('miniListDiv');
-        miniGoals.appendChild(miniListDiv);
+        const miniItemsContainer = document.createElement('div')
+        miniItemsContainer.classList.add('miniItemsContainer')
+        miniListDiv.appendChild(miniItemsContainer);
 
         const miniInputItem = document.createElement('li');
         miniInputItem.innerHTML = miniText.value;
         miniInputItem.classList.add('miniListText');
-        miniListDiv.appendChild(miniInputItem);
+        miniItemsContainer.appendChild(miniInputItem);
         miniText.value = '';
 
         const miniCheckButton = document.createElement('button');
         miniCheckButton.innerHTML = '<i class="fa-solid fa-check" id="miniCheck"></i>';
         miniCheckButton.classList.add('miniListButton');
         miniCheckButton.classList.add('miniCheck');
-        miniListDiv.appendChild(miniCheckButton);
+        miniItemsContainer.appendChild(miniCheckButton);
 
         const miniRemoveButton = document.createElement('button');
         miniRemoveButton.innerHTML = '<i class="fa-solid fa-minus" id="miniRemove"></i>';
         miniRemoveButton.classList.add('miniListButton');
         miniRemoveButton.classList.add('miniRemove');
-        miniListDiv.appendChild(miniRemoveButton);
-    }
+        miniItemsContainer.appendChild(miniRemoveButton);    
+}
 
     miniGoals.addEventListener('click', completeMini);
     miniGoals.addEventListener('click', removeMini);
@@ -154,11 +159,12 @@ function createList(event){
     rInput.classList.add('realisticInput');
     rDeadline.appendChild(rInput);
 
-
     detailsDiv.appendChild(why);
     detailsDiv.appendChild(miniGoals);
     detailsDiv.appendChild(hDeadline);
     detailsDiv.appendChild(rDeadline);
+
+    localStorage.setItem('list', '.list'); //is this right? How do i get the info to restore on the page???
 }
 
 function deleteRow(e){
@@ -213,20 +219,20 @@ function removeMini(e){
     }
 }
 
-for (var x = 0; x<3; x++){
+
 function completeMini(e){
         const miniCompleteButton = e.target;
         if (miniCompleteButton.classList[1] === 'miniCheck'){
             const miniListItem = miniCompleteButton.closest('div')
             const miniCheckButton = miniCompleteButton.querySelector('#miniCheck');
             miniListItem.classList.toggle('miniCompletedItem');
-            miniCheckButton.classList.toggle('miniCompletedButton');  
+            miniCheckButton.classList.toggle('miniCompletedButton'); 
         }
     }
-}
 
 
 
-
-//this open/close issue with details might need a 3rd form so that the open adn close aren't being clicked at the same time. So maybe a third class option to serve as neutral ground
-
+/* if i ever want to limit the mini add use:
+    const children = miniListDiv.children.length;
+    if (children == 3){
+    miniAdd.removeEventListener('click', createMiniList); */
