@@ -5,7 +5,7 @@
 }
 
 body{
-    height: 100vh;
+    height: 100%;
     background-image: linear-gradient(230deg, #558B6E, #E0EDC5);
     font-family: 'Poiret One', cursive;
 }
@@ -248,16 +248,18 @@ textarea{
     height: 10px
 }
 
+
 .active{
-    color: blue;
     transition: 1s;
    transform: rotate(45deg); 
 }
 
-
+button{
+    background-color: transparent;
+}
 #miniAdd, #whyAdd{
-    font-weight: 600;
-    font-size: 30px;
+    font-weight: 200;
+    font-size: 25px;
     color: #4B5C4E;
     cursor: pointer;
     width: 40px;
