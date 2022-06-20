@@ -96,8 +96,7 @@ function createList(event) {
                 button.classList.toggle('active');
                 parent.classList.toggle('setReasonDiv');
                 textField.classList.toggle('setReason');
-                textField.toggleAttribute('disabled'); 
-                localStorage.setItem('whyDesign'+[i], button.classList[0]);  
+                textField.toggleAttribute('disabled');   
             }
             localStorage.setItem('reasonInput' + [i], whyText.value); 
             
@@ -343,12 +342,10 @@ function loadList() {
                 }
 
                 localStorage.setItem('reasonInput' + [i], whyText.value);
-                localStorage.setItem('whyDesign'+[i], button.classList[0]);
-                
             }
         }
         //this checks to see if there is a why input, and if so it'll style it differently from above
-        if (localStorage.getItem('whyDesign' + [i]) === 'active'){
+        if (localStorage.getItem('reasonInput' + [i]) != 'null' && localStorage.getItem('reasonInput' + [i]) != null){
             whyAdd.classList.toggle('active');
             whyInput.classList.toggle('setReasonDiv')
             whyText.classList.toggle('setReason');
@@ -552,21 +549,20 @@ const itemIndex = x.children[0].innerText;
 }
 
 function removeReason(x){
-    for (var i = 0; i < inputList.childNodes.length; i++) { 
-        if (localStorage.getItem('reasonInput' +[i]) == x){ 
+    for (var i = 1; i <= inputList.childNodes.length; i++) { 
+        if (localStorage.getItem('reasonInput' +[i]) == x ){ 
+            
         localStorage.removeItem('reasonInput'+[i]);
         localStorage.setItem('reasonInput'+[i], localStorage.getItem('reasonInput' + [i+1]));
         }
-       
-            localStorage.removeItem('reasonInput'+[i+1]); 
-            localStorage.setItem('reasonInput'+[i+1], localStorage.getItem('reasonInput' + [i+2]));
-            //THIS DOES WHAT I WANT BEHIND THE SCENES IN LOCAL STORAGE, BUT I THINK I NEED TO LINK THIS UP WITH THE 'WHAT DESIGN' NOW SO THAT THE 'ACTIVE' CLASS ALIGNS AND SHOWS THE INPUT!!!!
+        if (localStorage.getItem('reasonInput' +[i]) > x ) { 
+        localStorage.setItem('reasonInput'+[i], localStorage.getItem('reasonInput' + [i+1]));
         
-        } 
         }
-
-
-
+    }
+            //Ok so this works but it is only affecting the i that is equal to the x. It won't actualy go to the next i. Which is fine if I knew how to exhaust all options after the initiel 
+        } 
+        
 //Styles list point to show completion
 function completeRow(e) {
     const completeButton = e.target;
