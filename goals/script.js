@@ -61,7 +61,7 @@ function createList(event) {
     const why = document.createElement('div');
     why.classList.add('why-div');
     const whyPrompt = document.createElement('p');
-    whyPrompt.innerText = 'This goal is important to me because...';
+    whyPrompt.innerText = 'Why does this goal matter?';
     why.appendChild(whyPrompt);
     const whyInput = document.createElement('div');
     whyInput.classList.add('whyInput');
@@ -107,7 +107,7 @@ function createList(event) {
     const miniGoals = document.createElement('div');
     miniGoals.classList.add('miniGoals-div');
     const miniPrompt = document.createElement('p');
-    miniPrompt.innerText = 'mini goals needed';
+    miniPrompt.innerText = 'Stepping Stones';
     miniGoals.appendChild(miniPrompt);
     const miniInput = document.createElement('div');
     miniInput.classList.add('miniInput');
@@ -291,7 +291,7 @@ function loadList() {
         const why = document.createElement('div');
         why.classList.add('why-div');
         const whyPrompt = document.createElement('p');
-        whyPrompt.innerText = 'This goal is important to me because...';
+        whyPrompt.innerText = 'Why does this goal matter?';
         why.appendChild(whyPrompt);
         const whyInput = document.createElement('div');
         whyInput.classList.add('whyInput');
@@ -356,7 +356,7 @@ function loadList() {
         const miniGoals = document.createElement('div');
         miniGoals.classList.add('miniGoals-div');
         const miniPrompt = document.createElement('p');
-        miniPrompt.innerText = 'mini goals needed';
+        miniPrompt.innerText = 'Stepping Stones';
         miniGoals.appendChild(miniPrompt);
         const miniInput = document.createElement('div');
         miniInput.classList.add('miniInput');
