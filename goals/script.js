@@ -16,11 +16,14 @@ function createList(event) {
     if (inputText.value == '') {
         return false;
     }
-
+    if (inputList.childNodes.length > 4){
+        alert("Don't spread yourself too thin, focus on the most important goals first.");
+        return false;
+    }
+    //Use this limit on goals to then control exact steps needed to delete reasoninput1,2,3,etc.
     const listContainer = document.createElement('div');
     listContainer.classList.add('listContainer');
     inputList.appendChild(listContainer);
-
 
     const listDiv = document.createElement('div');
     listDiv.classList.add('listDiv');
@@ -529,7 +532,6 @@ function deleteRow(e) {
         const form = listItemParent.children[1];
         const whyText = listItemParent.querySelector('.whyText');
         removeStorage(listItemParent);
-        removeReason(whyText.value);
         listItemParent.remove();
     } 
 }
@@ -543,25 +545,84 @@ function removeStorage(x){
         memory = JSON.parse(localStorage.getItem('memory'));
     }
 const itemIndex = x.children[0].innerText;
-    memory.splice(memory.indexOf(itemIndex), 1);
-    localStorage.setItem('memory', JSON.stringify(memory));
 
+//This is an overly complex way of deleting and passing down the values but until I learn react this will do. I had to limit the amount of inputs allowed so that I can write out the exact steps of each delete. There is likely a loop for this but after a solid month of working on this this will do for now.
+    if (memory.indexOf(itemIndex) == 0){ 
+        localStorage.removeItem('reasonInput1');
+        localStorage.setItem('reasonInput1', localStorage.getItem('reasonInput2'));
+        localStorage.removeItem('miniTest1');
+        localStorage.setItem('miniTest1', localStorage.getItem('miniTest2'));
+
+        localStorage.removeItem('reasonInput2');
+        localStorage.setItem('reasonInput2', localStorage.getItem('reasonInput3'));
+        localStorage.removeItem('miniTest2');
+        localStorage.setItem('miniTest2', localStorage.getItem('miniTest3'));
+
+        localStorage.removeItem('reasonInput3');
+        localStorage.setItem('reasonInput3', localStorage.getItem('reasonInput4'));
+        localStorage.removeItem('miniTest3');
+        localStorage.setItem('miniTest3', localStorage.getItem('miniTest4'));
+
+        localStorage.removeItem('reasonInput4');
+        localStorage.setItem('reasonInput4', localStorage.getItem('reasonInput5'));
+        localStorage.removeItem('miniTest4');
+        localStorage.setItem('miniTest4', localStorage.getItem('miniTest5'));
+
+        localStorage.removeItem('reasonInput5');
+        localStorage.removeItem('miniTest5');
+        }
+
+        if (memory.indexOf(itemIndex) == 1){ 
+        localStorage.removeItem('reasonInput2');
+        localStorage.setItem('reasonInput2', localStorage.getItem('reasonInput3'));
+        localStorage.removeItem('miniTest2');
+        localStorage.setItem('miniTest2', localStorage.getItem('miniTest3'));
+
+        localStorage.removeItem('reasonInput3');
+        localStorage.setItem('reasonInput3', localStorage.getItem('reasonInput4'));
+        localStorage.removeItem('miniTest3');
+        localStorage.setItem('miniTest3', localStorage.getItem('miniTest4'));
+
+        localStorage.removeItem('reasonInput4');
+        localStorage.setItem('reasonInput4', localStorage.getItem('reasonInput5'));
+        localStorage.removeItem('miniTest4');
+        localStorage.setItem('miniTest4', localStorage.getItem('miniTest5'));
+
+        localStorage.removeItem('reasonInput5');
+        localStorage.removeItem('miniTest5');
+            }
+        if (memory.indexOf(itemIndex) == 2){ 
+            localStorage.removeItem('reasonInput3');
+        localStorage.setItem('reasonInput3', localStorage.getItem('reasonInput4'));
+        localStorage.removeItem('miniTest3');
+        localStorage.setItem('miniTest3', localStorage.getItem('miniTest4'));
+
+        localStorage.removeItem('reasonInput4');
+        localStorage.setItem('reasonInput4', localStorage.getItem('reasonInput5'));
+        localStorage.removeItem('miniTest4');
+        localStorage.setItem('miniTest4', localStorage.getItem('miniTest5'));
+
+        localStorage.removeItem('reasonInput5');
+        localStorage.removeItem('miniTest5');
+            }
+        if (memory.indexOf(itemIndex) == 3){ 
+            localStorage.removeItem('reasonInput4');
+            localStorage.setItem('reasonInput4', localStorage.getItem('reasonInput5'));
+            localStorage.removeItem('miniTest4');
+            localStorage.setItem('miniTest4', localStorage.getItem('miniTest5'));
+    
+            localStorage.removeItem('reasonInput5');
+            localStorage.removeItem('miniTest5');
+            }
+        if (memory.indexOf(itemIndex) == 4){ 
+            localStorage.removeItem('reasonInput5');
+            localStorage.removeItem('miniTest5');
+                }
+
+        memory.splice(memory.indexOf(itemIndex), 1);
+        localStorage.setItem('memory', JSON.stringify(memory));
 }
 
-function removeReason(x){
-    for (var i = 1; i <= inputList.childNodes.length; i++) { 
-        if (localStorage.getItem('reasonInput' +[i]) == x ){ 
-            
-        localStorage.removeItem('reasonInput'+[i]);
-        localStorage.setItem('reasonInput'+[i], localStorage.getItem('reasonInput' + [i+1]));
-        }
-        if (localStorage.getItem('reasonInput' +[i]) > x ) { 
-        localStorage.setItem('reasonInput'+[i], localStorage.getItem('reasonInput' + [i+1]));
-        
-        }
-    }
-            //Ok so this works but it is only affecting the i that is equal to the x. It won't actualy go to the next i. Which is fine if I knew how to exhaust all options after the initiel 
-        } 
         
 //Styles list point to show completion
 function completeRow(e) {
