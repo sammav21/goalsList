@@ -105,7 +105,7 @@ function createList(event) {
     const miniGoals = document.createElement('div');
     miniGoals.classList.add('miniGoals-div');
     const miniPrompt = document.createElement('p');
-    miniPrompt.innerText = 'Stepping Stones';
+    miniPrompt.innerText = 'Stepping Stone';
     miniGoals.appendChild(miniPrompt);
     const miniInput = document.createElement('div');
     miniInput.classList.add('miniInput');
@@ -117,76 +117,28 @@ function createList(event) {
     const miniAdd = document.createElement('button');
     miniAdd.innerHTML = '<i class="fa-thin fa-plus" id="miniAdd">';
     miniInput.appendChild(miniAdd);
-    const miniListDiv = document.createElement('ul');
-    miniListDiv.classList.add('miniList');
-    miniGoals.appendChild(miniListDiv);
 
-
-    miniAdd.addEventListener('click', createMiniList);
+    miniAdd.addEventListener('click', setMini);
     //Function to dynamically add mini list inside of details div
-    function createMiniList(event) {
+    function setMini(event) {
         event.preventDefault();
+        let addButton = event.target;
+        let parent = addButton.closest('div');
+        let textField = parent.firstChild;
 
-        if (miniText.value == '') {
+        if (textField.value == '') {
             return false;
         }
 
-        const miniItemsContainer = document.createElement('div')
-        miniItemsContainer.classList.add('miniItemsContainer')
-        miniListDiv.appendChild(miniItemsContainer);
-
-        const miniInputItem = document.createElement('li');
-        miniInputItem.innerHTML = miniText.value;
-        miniInputItem.classList.add('miniListText');
-        miniItemsContainer.appendChild(miniInputItem);
-
-        saveMini(miniInputItem.innerText);
-
-        //Save user input. Interestingly the [i] used here is being affected by the loop for the reason above so this one doesn't need another loop
-        function saveMini(x) {
-            let miniTest;
-
-            if (localStorage.getItem('miniTest' + [i]) === null) {
-                miniTest = [];
-            } else {
-                miniTest = JSON.parse(localStorage.getItem('miniTest' + [i]));
-            }
-            miniTest.push(x);
-            localStorage.setItem('miniTest' + [i], JSON.stringify(miniTest));
+        if (addButton.classList[1] != 'active') {
+            addButton.classList.toggle('active');
+            parent.classList.toggle('setStep');
+            textField.classList.toggle('setStepText');
+            textField.toggleAttribute('disabled');
         }
-
-
-        miniText.value = '';
-
-        const miniCheckButton = document.createElement('button');
-        miniCheckButton.innerHTML = '<i class="fa-solid fa-check" id="miniCheck"></i>';
-        miniCheckButton.classList.add('miniListButton');
-        miniCheckButton.classList.add('miniCheck');
-        miniItemsContainer.appendChild(miniCheckButton);
-
-        const miniRemoveButton = document.createElement('button');
-        miniRemoveButton.innerHTML = '<i class="fa-solid fa-minus" id="miniRemove"></i>';
-        miniRemoveButton.classList.add('miniListButton');
-        miniRemoveButton.classList.add('miniRemove');
-        miniItemsContainer.appendChild(miniRemoveButton);
+        localStorage.setItem('miniTest' + [i], miniText.value);
     }
 
-
-    miniGoals.addEventListener('click', completeMini);
-
-    function completeMini(e) {
-        e.preventDefault();
-        const miniCompleteButton = e.target;
-        const miniListItem = miniCompleteButton.closest('div')
-        const miniCheckButton = miniCompleteButton.querySelector('#miniCheck');
-
-        if (miniCompleteButton.classList[1] === 'miniCheck') {
-            miniListItem.classList.toggle('miniCompletedItem');
-            miniCheckButton.classList.toggle('miniCompletedButton');
-        }
-
-    } 
-    miniGoals.addEventListener('click', removeMini);
 
     const hDeadline = document.createElement('div');
     hDeadline.classList.add('hDeadline-div');
@@ -234,7 +186,6 @@ function saveList(x) {
 function loadList() {
     let memory;
 
-
     if (localStorage.getItem('memory') === null) {
         memory = [];
     } else {
@@ -255,14 +206,14 @@ function loadList() {
         listContainer.appendChild(listDiv);
 
         const inputItem = document.createElement('li');
-        inputItem.innerText = item //Loads the saved list
+        inputItem.innerText = item; //Loads the saved list
         inputItem.classList.add('list-text');
         listDiv.appendChild(inputItem);
 
 
         const detailsButton = document.createElement('button');
         detailsButton.innerHTML = '<i class="fa-solid fa-caret-down" id="details"></i>';
-        detailsButton.classList.add('listButton')
+        detailsButton.classList.add('listButton');
         detailsButton.classList.add('closed');
 
         listDiv.appendChild(detailsButton);
@@ -297,8 +248,8 @@ function loadList() {
         whyText.maxLength = '150';
         whyText.classList.add('whyText');
         //Reloads user input for REASON section    
-
         whyInput.appendChild(whyText);
+
         const whyAdd = document.createElement('button');
         whyAdd.innerHTML = '<i class="fa-thin fa-plus" id="whyAdd">';
 
@@ -343,137 +294,61 @@ function loadList() {
         //this checks to see if there is a why input, and if so it'll style it differently from above
         if (localStorage.getItem('reasonInput' + [i]) != 'null' && localStorage.getItem('reasonInput' + [i]) != null) {
             whyAdd.classList.toggle('active');
-            whyInput.classList.toggle('setReasonDiv')
+            whyInput.classList.toggle('setReasonDiv');
             whyText.classList.toggle('setReason');
             whyText.toggleAttribute('disabled');
 
             whyText.value = localStorage.getItem('reasonInput' + [i]);
         }
-        const miniGoals = document.createElement('div');
-        miniGoals.classList.add('miniGoals-div');
-        const miniPrompt = document.createElement('p');
-        miniPrompt.innerText = 'Stepping Stones';
-        miniGoals.appendChild(miniPrompt);
-        const miniInput = document.createElement('div');
-        miniInput.classList.add('miniInput');
-        miniGoals.appendChild(miniInput);
-        const miniText = document.createElement('input');
-        miniText.type = 'text';
-        miniText.classList.add('miniText');
-        miniInput.appendChild(miniText);
-        const miniAdd = document.createElement('button');
-        miniAdd.innerHTML = '<i class="fa-thin fa-plus" id="miniAdd">';
-        miniInput.appendChild(miniAdd);
 
-        //Similar to start of load function, i introduce a variable to hold all JSON.parse values. Then intro them in forEach. Again no need to loop here either because the [i] is affected by previous loop
-        let miniTest;
-        if (localStorage.getItem('miniTest' + [i]) === null) {
-            miniTest = [];
-        } else {
-            miniTest = JSON.parse(localStorage.getItem('miniTest' + [i]));
+    const miniGoals = document.createElement('div');
+    miniGoals.classList.add('miniGoals-div');
+    const miniPrompt = document.createElement('p');
+    miniPrompt.innerText = 'Stepping Stone';
+    miniGoals.appendChild(miniPrompt);
+    const miniInput = document.createElement('div');
+    miniInput.classList.add('miniInput');
+    miniGoals.appendChild(miniInput);
+    const miniText = document.createElement('input');
+    miniText.type = 'text';
+    miniText.classList.add('miniText');
+    miniInput.appendChild(miniText);
+    const miniAdd = document.createElement('button');
+    miniAdd.innerHTML = '<i class="fa-thin fa-plus" id="miniAdd">';
+    miniInput.appendChild(miniAdd);
+
+    miniAdd.addEventListener('click', setMini);
+ 
+    function setMini(event) {
+        event.preventDefault();
+        let addButton = event.target;
+        let parent = addButton.closest('div');
+        let textField = parent.firstChild;
+
+        if (textField.value == '') {
+            addButton.classList.toggle('active');
+            parent.classList.toggle('setStep');
+            textField.classList.toggle('setStepText');
+            textField.toggleAttribute('disabled');
+            return false;
         }
 
-
-        const miniListDiv = document.createElement('ul');
-        miniListDiv.classList.add('miniList');
-        miniGoals.appendChild(miniListDiv);
-
-        miniTest.forEach(function (e) {
-            const miniItemsContainer = document.createElement('div')
-            miniItemsContainer.classList.add('miniItemsContainer')
-            miniListDiv.appendChild(miniItemsContainer);
-
-
-            const miniInputItem = document.createElement('li');
-            miniInputItem.innerText = e;
-            miniInputItem.classList.add('miniListText');
-
-            miniItemsContainer.appendChild(miniInputItem);
-
-
-            miniText.value = '';
-
-
-            const miniCheckButton = document.createElement('button');
-            miniCheckButton.innerHTML = '<i class="fa-solid fa-check" id="miniCheck"></i>';
-            miniCheckButton.classList.add('miniListButton');
-            miniCheckButton.classList.add('miniCheck');
-            miniItemsContainer.appendChild(miniCheckButton);
-
-            const miniRemoveButton = document.createElement('button');
-            miniRemoveButton.innerHTML = '<i class="fa-solid fa-minus" id="miniRemove"></i>';
-            miniRemoveButton.classList.add('miniListButton');
-            miniRemoveButton.classList.add('miniRemove');
-            miniItemsContainer.appendChild(miniRemoveButton);
-
-        });
-        miniAdd.addEventListener('click', createMiniList);
-
-
-        function createMiniList(event) {
-            event.preventDefault();
-
-            if (miniText.value == '') {
-                return false;
-            }
-
-
-            const miniItemsContainer = document.createElement('div')
-            miniItemsContainer.classList.add('miniItemsContainer')
-            miniListDiv.appendChild(miniItemsContainer);
-
-
-            const miniInputItem = document.createElement('li');
-            miniInputItem.innerHTML = miniText.value;
-            miniInputItem.classList.add('miniListText');
-            miniItemsContainer.appendChild(miniInputItem);
-
-            saveMini(miniInputItem.innerText);
-
-            function saveMini(x) {
-                let miniTest;
-
-                if (localStorage.getItem('miniTest' + [i]) === null) {
-                    miniTest = [];
-                } else {
-                    miniTest = JSON.parse(localStorage.getItem('miniTest' + [i]));
-                }
-                miniTest.push(x);
-                localStorage.setItem('miniTest' + [i], JSON.stringify(miniTest));
-            }
-            miniText.value = '';
-
-            const miniCheckButton = document.createElement('button');
-            miniCheckButton.innerHTML = '<i class="fa-solid fa-check" id="miniCheck"></i>';
-            miniCheckButton.classList.add('miniListButton');
-            miniCheckButton.classList.add('miniCheck');
-            miniItemsContainer.appendChild(miniCheckButton);
-
-            const miniRemoveButton = document.createElement('button');
-            miniRemoveButton.innerHTML = '<i class="fa-solid fa-minus" id="miniRemove"></i>';
-            miniRemoveButton.classList.add('miniListButton');
-            miniRemoveButton.classList.add('miniRemove');
-            miniItemsContainer.appendChild(miniRemoveButton);
-
+        if (addButton.classList[1] != 'active') {
+            addButton.classList.toggle('active');
+            parent.classList.toggle('setStep');
+            textField.classList.toggle('setStepText');
+            textField.toggleAttribute('disabled');
         }
+        localStorage.setItem('miniTest' + [i], miniText.value);
+    }
+    if (localStorage.getItem('miniTest' + [i]) != 'null' && localStorage.getItem('miniTest' + [i]) != null) {
+        miniAdd.classList.toggle('active');
+        miniInput.classList.toggle('setStep');
+        miniText.classList.toggle('setStepText');
+        miniText.toggleAttribute('disabled');
 
-
-
-        miniGoals.addEventListener('click', completeMini);
-
-        function completeMini(e) {
-            e.preventDefault();
-            const miniCompleteButton = e.target;
-            const miniListItem = miniCompleteButton.closest('div')
-            const miniCheckButton = miniCompleteButton.querySelector('#miniCheck');
-
-            if (miniCompleteButton.classList[1] === 'miniCheck') {
-                miniListItem.classList.toggle('miniCompletedItem');
-                miniCheckButton.classList.toggle('miniCompletedButton');
-            }
-        }
-
-        miniGoals.addEventListener('click', removeMini);
+        miniText.value = localStorage.getItem('miniTest' + [i]);
+    }
 
         const hDeadline = document.createElement('div');
         hDeadline.classList.add('hDeadline-div');
@@ -506,8 +381,6 @@ function loadList() {
 
 }
 
-
-
 //Delets main list input and invivisible detail DIV next to it
 function deleteRow(e) {
     const removeButton = e.target;
@@ -528,10 +401,11 @@ function removeStorage(x) {
     } else {
         memory = JSON.parse(localStorage.getItem('memory'));
     }
+
     const itemIndex = x.children[0].innerText;
 
     //This is an overly complex way of deleting and passing down the values but until I learn react this will do. I had to limit the amount of inputs allowed so that I can write out the exact steps of each delete. There is likely a loop for this but after a solid month of working on this, this will do for now.
-    if (memory.indexOf(itemIndex) == 0) {
+    if (memory.indexOf(itemIndex) == 0){ 
         localStorage.removeItem('reasonInput1');
         localStorage.setItem('reasonInput1', localStorage.getItem('reasonInput2'));
         localStorage.removeItem('miniTest1');
@@ -554,9 +428,9 @@ function removeStorage(x) {
 
         localStorage.removeItem('reasonInput5');
         localStorage.removeItem('miniTest5');
-    }
+        }
 
-    if (memory.indexOf(itemIndex) == 1) {
+        if (memory.indexOf(itemIndex) == 1){ 
         localStorage.removeItem('reasonInput2');
         localStorage.setItem('reasonInput2', localStorage.getItem('reasonInput3'));
         localStorage.removeItem('miniTest2');
@@ -574,9 +448,9 @@ function removeStorage(x) {
 
         localStorage.removeItem('reasonInput5');
         localStorage.removeItem('miniTest5');
-    }
-    if (memory.indexOf(itemIndex) == 2) {
-        localStorage.removeItem('reasonInput3');
+            }
+        if (memory.indexOf(itemIndex) == 2){ 
+            localStorage.removeItem('reasonInput3');
         localStorage.setItem('reasonInput3', localStorage.getItem('reasonInput4'));
         localStorage.removeItem('miniTest3');
         localStorage.setItem('miniTest3', localStorage.getItem('miniTest4'));
@@ -588,21 +462,20 @@ function removeStorage(x) {
 
         localStorage.removeItem('reasonInput5');
         localStorage.removeItem('miniTest5');
-    }
-    if (memory.indexOf(itemIndex) == 3) {
-        localStorage.removeItem('reasonInput4');
-        localStorage.setItem('reasonInput4', localStorage.getItem('reasonInput5'));
-        localStorage.removeItem('miniTest4');
-        localStorage.setItem('miniTest4', localStorage.getItem('miniTest5'));
+            }
+        if (memory.indexOf(itemIndex) == 3){ 
+            localStorage.removeItem('reasonInput4');
+            localStorage.setItem('reasonInput4', localStorage.getItem('reasonInput5'));
+            localStorage.removeItem('miniTest4');
+            localStorage.setItem('miniTest4', localStorage.getItem('miniTest5'));
 
-        localStorage.removeItem('reasonInput5');
-        localStorage.removeItem('miniTest5');
-    }
-    if (memory.indexOf(itemIndex) == 4) {
-        localStorage.removeItem('reasonInput5');
-        localStorage.removeItem('miniTest5');
-    }
-
+            localStorage.removeItem('reasonInput5');
+            localStorage.removeItem('miniTest5');
+            }
+        if (memory.indexOf(itemIndex) == 4){ 
+            localStorage.removeItem('reasonInput5');
+            localStorage.removeItem('miniTest5');
+                }
     memory.splice(memory.indexOf(itemIndex), 1);
     localStorage.setItem('memory', JSON.stringify(memory));
 }
@@ -640,18 +513,5 @@ function details(e) {
     }
 }
 
-function removeMini(e) {
-    const removeButton = e.target;
 
-    if (removeButton.classList[1] === 'miniRemove') {
-        const listItem = removeButton.closest('div');
-        listItem.remove();
-        deleteMiniRow(listItem);
-    }
-}
-
-function deleteMiniRow(x) {
-    //This is a list nested within an item of another list. It's likely possible with vanilla JS, but leave this here, learn react, and come back.
-}
-
-// left to do, figure out how to save the "completed" style of each item. Apply this to the mini list as well as the deletion for the mini list. Figure out how to save the date picker options to storage
+/* left to do, figure out how to save the "completed" style of each item. Figure out how to save the date picker options to storage*/
