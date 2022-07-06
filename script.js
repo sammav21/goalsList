@@ -7,7 +7,6 @@ const inputList = document.querySelector('.list');
 document.addEventListener('DOMContentLoaded', loadList);
 inputButton.addEventListener('click', createList);
 inputList.addEventListener('click', deleteRow);
-inputList.addEventListener('click', completeRow);
 inputList.addEventListener('click', details);
 
 //Create initial list 
@@ -28,6 +27,7 @@ function createList(event) {
     const listDiv = document.createElement('div');
     listDiv.classList.add('listDiv');
     listContainer.appendChild(listDiv);
+    
 
     const inputItem = document.createElement('li');
     inputItem.innerText = inputText.value;
@@ -46,6 +46,8 @@ function createList(event) {
     checkButton.classList.add('listButton');
     checkButton.classList.add('check');
     listDiv.appendChild(checkButton);
+
+    const checkIcon = checkButton.querySelector('#check');
 
     const removeButton = document.createElement('button');
     removeButton.innerHTML = '<i class="fa-solid fa-minus" id="remove"></i>';
@@ -205,7 +207,7 @@ function loadList() {
         listDiv.classList.add('listDiv');
         listContainer.appendChild(listDiv);
 
-        const inputItem = document.createElement('li');
+      const inputItem = document.createElement('li');
         inputItem.innerText = item; //Loads the saved list
         inputItem.classList.add('list-text');
         listDiv.appendChild(inputItem);
@@ -224,12 +226,31 @@ function loadList() {
         checkButton.classList.add('check');
         listDiv.appendChild(checkButton);
 
+        const checkIcon = checkButton.querySelector('#check');
+
         const removeButton = document.createElement('button');
         removeButton.innerHTML = '<i class="fa-solid fa-minus" id="remove"></i>';
         removeButton.classList.add('listButton');
         removeButton.classList.add('remove');
         listDiv.appendChild(removeButton);
 
+            if (localStorage.getItem('row'+[memory.indexOf(listDiv.innerText)+1]) ==='complete') {
+                listDiv.classList.toggle('completedItem');
+                checkIcon.classList.toggle('completedButton');
+            }
+
+        inputList.addEventListener('click', resetRow);
+
+        function resetRow(){
+            if (memory.indexOf(listDiv.classList[1]) ==='completedItem'){
+                listDiv.classList.toggle('completedItem');
+                checkIcon.classList.toggle('completedButton');
+                //need to find way to remove the completed item from storage if the person unchecks it
+            }
+            
+        }
+        
+          
         const detailsForm = document.createElement('form');
         detailsForm.classList.add('detailsForm');
         detailsForm.style.display = 'none';
@@ -410,24 +431,34 @@ function removeStorage(x) {
         localStorage.setItem('reasonInput1', localStorage.getItem('reasonInput2'));
         localStorage.removeItem('miniTest1');
         localStorage.setItem('miniTest1', localStorage.getItem('miniTest2'));
+        localStorage.removeItem('row1');
+        localStorage.setItem('row1', localStorage.getItem('row2'));
 
         localStorage.removeItem('reasonInput2');
         localStorage.setItem('reasonInput2', localStorage.getItem('reasonInput3'));
         localStorage.removeItem('miniTest2');
         localStorage.setItem('miniTest2', localStorage.getItem('miniTest3'));
+        localStorage.removeItem('row2');
+        localStorage.setItem('row2', localStorage.getItem('row3'));
 
         localStorage.removeItem('reasonInput3');
         localStorage.setItem('reasonInput3', localStorage.getItem('reasonInput4'));
         localStorage.removeItem('miniTest3');
         localStorage.setItem('miniTest3', localStorage.getItem('miniTest4'));
+        localStorage.removeItem('row3');
+        localStorage.setItem('row3', localStorage.getItem('row4'));
 
         localStorage.removeItem('reasonInput4');
         localStorage.setItem('reasonInput4', localStorage.getItem('reasonInput5'));
         localStorage.removeItem('miniTest4');
         localStorage.setItem('miniTest4', localStorage.getItem('miniTest5'));
+        localStorage.removeItem('row4');
+        localStorage.setItem('row4', localStorage.getItem('row5'));
 
         localStorage.removeItem('reasonInput5');
         localStorage.removeItem('miniTest5');
+        localStorage.removeItem('row5');
+        
         }
 
         if (memory.indexOf(itemIndex) == 1){ 
@@ -435,62 +466,97 @@ function removeStorage(x) {
         localStorage.setItem('reasonInput2', localStorage.getItem('reasonInput3'));
         localStorage.removeItem('miniTest2');
         localStorage.setItem('miniTest2', localStorage.getItem('miniTest3'));
+        localStorage.removeItem('row2');
+        localStorage.setItem('row2', localStorage.getItem('row3'));
 
         localStorage.removeItem('reasonInput3');
         localStorage.setItem('reasonInput3', localStorage.getItem('reasonInput4'));
         localStorage.removeItem('miniTest3');
         localStorage.setItem('miniTest3', localStorage.getItem('miniTest4'));
+        localStorage.removeItem('row3');
+        localStorage.setItem('row3', localStorage.getItem('row4'));
 
         localStorage.removeItem('reasonInput4');
         localStorage.setItem('reasonInput4', localStorage.getItem('reasonInput5'));
         localStorage.removeItem('miniTest4');
         localStorage.setItem('miniTest4', localStorage.getItem('miniTest5'));
+        localStorage.removeItem('row4');
+        localStorage.setItem('row4', localStorage.getItem('row5'));
 
         localStorage.removeItem('reasonInput5');
         localStorage.removeItem('miniTest5');
+        localStorage.removeItem('row5');
+
             }
         if (memory.indexOf(itemIndex) == 2){ 
             localStorage.removeItem('reasonInput3');
         localStorage.setItem('reasonInput3', localStorage.getItem('reasonInput4'));
         localStorage.removeItem('miniTest3');
         localStorage.setItem('miniTest3', localStorage.getItem('miniTest4'));
+        localStorage.removeItem('row3');
+        localStorage.setItem('row3', localStorage.getItem('row4'));
 
         localStorage.removeItem('reasonInput4');
         localStorage.setItem('reasonInput4', localStorage.getItem('reasonInput5'));
         localStorage.removeItem('miniTest4');
         localStorage.setItem('miniTest4', localStorage.getItem('miniTest5'));
+        localStorage.removeItem('row4');
+        localStorage.setItem('row4', localStorage.getItem('row5'));
 
         localStorage.removeItem('reasonInput5');
         localStorage.removeItem('miniTest5');
+        localStorage.removeItem('row5');
             }
         if (memory.indexOf(itemIndex) == 3){ 
             localStorage.removeItem('reasonInput4');
-            localStorage.setItem('reasonInput4', localStorage.getItem('reasonInput5'));
-            localStorage.removeItem('miniTest4');
-            localStorage.setItem('miniTest4', localStorage.getItem('miniTest5'));
+        localStorage.setItem('reasonInput4', localStorage.getItem('reasonInput5'));
+        localStorage.removeItem('miniTest4');
+        localStorage.setItem('miniTest4', localStorage.getItem('miniTest5'));
+        localStorage.removeItem('row4');
+        localStorage.setItem('row4', localStorage.getItem('row5'));
 
-            localStorage.removeItem('reasonInput5');
-            localStorage.removeItem('miniTest5');
+        localStorage.removeItem('reasonInput5');
+        localStorage.removeItem('miniTest5');
+        localStorage.removeItem('row5');
             }
         if (memory.indexOf(itemIndex) == 4){ 
             localStorage.removeItem('reasonInput5');
             localStorage.removeItem('miniTest5');
+            localStorage.removeItem('row5');
                 }
     memory.splice(memory.indexOf(itemIndex), 1);
     localStorage.setItem('memory', JSON.stringify(memory));
 }
 
+for (var i = 0; i <= inputList.childNodes.length; i++) {
+    if (i != 0) { //this line allows me to apply this refreshed loop to each item instead of skipping over
+        continue;
+    }
+    inputList.addEventListener('click', completeRow);
 
 //Styles list point to show completion
 function completeRow(e) {
+    
     const completeButton = e.target;
-
+    const listItem = completeButton.closest('div');
+    const checkIcon = completeButton.querySelector('#check');
+   
     if (completeButton.classList[1] === 'check') {
-        const listItem = completeButton.closest('div');
-        const checkButton = completeButton.querySelector('#check');
         listItem.classList.toggle('completedItem');
-        checkButton.classList.toggle('completedButton');
+        checkIcon.classList.toggle('completedButton');
     }
+
+    let memory;
+    if (localStorage.getItem('memory') === null) {
+        memory = [];
+    } else {
+        memory = JSON.parse(localStorage.getItem('memory'));
+    }
+
+    
+    localStorage.setItem('row'+[memory.indexOf(listItem.innerText)+1], 'complete');
+    //this stores the check mark how I want it, but how do I remove the check if the person wants to reopen the item?
+}
 }
 
 
@@ -514,4 +580,4 @@ function details(e) {
 }
 
 
-/* left to do, figure out how to save the "completed" style of each item. Figure out how to save the date picker options to storage*/
+/* left to do, figure out how to delete the completed version of the item without having to fully delete the item. Figure out how to save the date picker options to storage*/
