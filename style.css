@@ -267,59 +267,6 @@ button{
     justify-content: center;
 }
 
-.miniList{
-    width: 370px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin: 5px 0 0 0;
-}
-
-.miniItemsContainer{
-    width: 75%;
-    display: flex;
-    align-items: center;
-    border-radius: 5px;
-    margin: 5px 0 0 0;
-}
-
-.miniListText{
-    flex: 1;
-    overflow: hidden;
-    font-size: 22px;
-    margin-left: 8px;
-   
-}
-
-.miniListButton{
-    color: #E0EDC5;
-}
-
-.miniListButton:hover{
-    background-color: #3b483d;
-}
-
-.miniCompletedItem{
-    background-color: #aabc85;
-    color: #4B5C4E;
-    box-shadow: 3px 3px #8a996d;
-    transition: .2s;
-}
-
-.miniCompletedButton{
-        font-size: 22px;
-        color: #4B5C4E;
-        background-color: #aabc85;
-        padding: 2px 5px
-    }
-    
-    
-.miniCompletedItem .miniRemove{
-        pointer-events: none;
-        color: #aabc85;
-}
-
-
 .hDeadline-div, .rDeadline-div{
     width: 400px;
     display: flex;
@@ -340,7 +287,7 @@ button{
     color: #E0EDC5;
     font-family: 'Poiret One', cursive;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 18px;
     position: relative;
     left: 20px;
     cursor: pointer;
@@ -368,4 +315,76 @@ input::-webkit-datetime-edit-year-field:focus {
     background-color: #3b483d;
     color: #E0EDC5;
     border-radius: 3px;
+}
+
+@media (min-width: 0px) and (max-width:500px){
+  body{
+    width: 100vw;
+  }  
+  header{
+    font-size: 8vh;
+  }
+
+  form{
+    padding: 10px;
+    width: 100vw;
+    }
+    .input-section{
+        padding-left: 20px;
+    }
+    input{
+        width: 270px;
+        height: 50px;
+        font-size: 8vw;
+    }
+
+    .list-section{
+        width: 100vw;
+    }
+
+    .list{
+        width: 100%;
+        padding-top: 10px;
+    }
+
+    .listContainer{
+        width: 80%;
+    }
+    
+    .listDiv{
+        width: 100%;
+    }
+
+    .detailsForm{
+        width: 360px;
+        margin: 5px 0 0 0;
+        font-size: 25px;
+    }
+
+    .why-div, .miniGoals-div{
+        width: 360px;
+        margin: 5px 0 0 5px;
+    }
+
+    .miniInput, .whyInput{
+        background-color: #E0EDC5;
+        width: 93%;
+    }
+
+    .hDeadline-div, .rDeadline-div{
+        width: 100%;
+        margin: 15px 0 0 5px;
+        font-size: 22px;
+    }
+
+    .hopefulInput, .realisticInput{
+        width: 50%; /*find a why to make this a text box instead of one line */
+        font-size: 18px;
+        left: 0px;
+        text-indent: 11px;
+    }
+    .realisticInput{
+        left: 4px;
+    }
+    
 }
