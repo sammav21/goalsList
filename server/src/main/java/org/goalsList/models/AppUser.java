@@ -11,20 +11,22 @@ import java.util.stream.Collectors;
 
 public class AppUser implements UserDetails {
 
+    private int appUserId;
     private String username;
     private String password;
     private boolean disabled;
     private final Collection<GrantedAuthority> authorities;
 
-    public AppUser(String username, String password, boolean disabled, Collection<GrantedAuthority> authorities) {
+    public AppUser(int appUserId, String username, String password, boolean disabled, Collection<GrantedAuthority> authorities) {
+        this.appUserId = appUserId;
         this.username = username;
         this.password = password;
         this.disabled = disabled;
         this.authorities = authorities;
     }
 
-    public AppUser(String username, String password, boolean disabled, List<String> roles) {
-        this(username, password, disabled, convertRolesToAuthorities(roles));
+    public AppUser(int appUserId, String username, String password, boolean disabled, List<String> roles) {
+        this(appUserId, username, password, disabled, convertRolesToAuthorities(roles));
     }
     private static Collection<GrantedAuthority> convertRolesToAuthorities(List<String> roles){
         return roles.stream()
@@ -74,5 +76,13 @@ public class AppUser implements UserDetails {
 
     public void setEnabled(boolean enabled) {
         this.disabled = enabled;
+    }
+
+    public int getAppUserId() {
+        return appUserId;
+    }
+
+    public void setAppUserId(int appUserId) {
+        this.appUserId = appUserId;
     }
 }
