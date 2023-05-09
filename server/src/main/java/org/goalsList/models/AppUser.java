@@ -14,19 +14,19 @@ public class AppUser implements UserDetails {
     private int appUserId;
     private String username;
     private String password;
-    private boolean disabled;
+    private boolean enabled;
     private final Collection<GrantedAuthority> authorities;
 
-    public AppUser(int appUserId, String username, String password, boolean disabled, Collection<GrantedAuthority> authorities) {
+    public AppUser(int appUserId, String username, String password, boolean enabled, Collection<GrantedAuthority> authorities) {
         this.appUserId = appUserId;
         this.username = username;
         this.password = password;
-        this.disabled = disabled;
+        this.enabled = enabled;
         this.authorities = authorities;
     }
 
-    public AppUser(int appUserId, String username, String password, boolean disabled, List<String> roles) {
-        this(appUserId, username, password, disabled, convertRolesToAuthorities(roles));
+    public AppUser(int appUserId, String username, String password, boolean enabled, List<String> roles) {
+        this(appUserId, username, password, enabled, convertRolesToAuthorities(roles));
     }
     private static Collection<GrantedAuthority> convertRolesToAuthorities(List<String> roles){
         return roles.stream()
@@ -71,11 +71,11 @@ public class AppUser implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return disabled;
+        return enabled;
     }
 
     public void setEnabled(boolean enabled) {
-        this.disabled = enabled;
+        this.enabled = enabled;
     }
 
     public int getAppUserId() {
