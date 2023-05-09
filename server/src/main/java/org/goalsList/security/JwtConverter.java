@@ -25,6 +25,7 @@ public class JwtConverter {
         return Jwts.builder()
                 .setIssuer(ISSUER)
                 .setSubject(user.getUsername())
+                .claim("app_user_id", user.getAppUserId())
                 .claim("authorities", authorities)
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_MILLIS))
                 .signWith(key)
@@ -42,9 +43,10 @@ public class JwtConverter {
                     .parseClaimsJws(token.substring(7));
 
             String username = jws.getBody().getSubject();
+            int appUserId = (int) jws.getBody().get("app_user_id");
             String authStr = (String) jws.getBody().get("authorities");
 
-            AppUser newUser = new AppUser(username, null, true, Arrays.asList(authStr.split(",")));
+            AppUser newUser = new AppUser(appUserId, username, null, true, Arrays.asList(authStr.split(",")));
             //should 3rd value be disabled true?
 
             return newUser;
