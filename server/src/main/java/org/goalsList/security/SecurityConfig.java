@@ -11,7 +11,6 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
-
     private final JwtConverter converter;
 
     public SecurityConfig(JwtConverter converter){
@@ -23,26 +22,27 @@ public class SecurityConfig {
         http.csrf().disable();
         http.cors();
         http.authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/api/authenticate").permitAll()
-                .antMatchers("/api/refresh_token").authenticated()
-                .antMatchers("/api/create_account").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/goalsList").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers(HttpMethod.POST, "/api/goalsList").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers(HttpMethod.PUT, "/api/goalsList").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/api/goalsList").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/**").denyAll()
+//                .antMatchers(HttpMethod.POST, "/api/authenticate").permitAll()
+//                .antMatchers("/api/refresh_token").authenticated()
+//                .antMatchers("/api/create_account").permitAll()
+//                .antMatchers(HttpMethod.GET, "/api/goalsList").hasAnyAuthority("USER", "ADMIN")
+//                .antMatchers(HttpMethod.POST, "/api/goalsList").hasAnyAuthority("USER", "ADMIN")
+//                .antMatchers(HttpMethod.PUT, "/api/goalsList").hasAnyAuthority("USER", "ADMIN")
+//                .antMatchers(HttpMethod.DELETE, "/api/goalsList").hasAnyAuthority("USER", "ADMIN")
+//                .antMatchers("/**").denyAll()
+                .antMatchers(HttpMethod.GET).authenticated()
                 .and()
-                .addFilter(new JwtRequestFilter(authenticationManager(authConfig), converter))
+//                .addFilter(new JwtRequestFilter(authenticationManager(authConfig), converter))
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         return http.build();
     }
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception{
-        return config.getAuthenticationManager();
-    }
+//    @Bean
+//    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception{
+//        return config.getAuthenticationManager();
+//    }
 
 }
 
