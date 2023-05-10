@@ -28,6 +28,7 @@ create table app_user_role(
 );
 create table goal (
 	goal_id int primary key auto_increment,
+    `name` varchar(255) not null,
     checked bit not null default(0),
     reason varchar(255),
     realistic_deadline varchar(50),
@@ -40,8 +41,8 @@ create table goal (
 
 create table stepping_stone (
 	stepping_stone_id int primary key auto_increment,
+	`name` varchar(100) not null,
 	checked bit not null default(0),
-    `name` varchar(100) not null,
     goal_id int not null,
     constraint fk_stone_goal_id
 		foreign key (goal_id)

@@ -47,7 +47,6 @@ public class JwtConverter {
             String authStr = (String) jws.getBody().get("authorities");
 
             AppUser newUser = new AppUser(appUserId, username, null, true, Arrays.asList(authStr.split(",")));
-            //should 3rd value be disabled true?
 
             return newUser;
         } catch (JwtException ex){
