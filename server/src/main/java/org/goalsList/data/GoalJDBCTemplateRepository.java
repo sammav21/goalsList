@@ -3,9 +3,14 @@ package org.goalsList.data;
 import org.goalsList.data.mappers.GoalMapper;
 import org.goalsList.models.Goal;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class GoalJDBCTemplateRepository implements GoalRepository{
@@ -23,12 +28,30 @@ public class GoalJDBCTemplateRepository implements GoalRepository{
 
     @Override
     public List<Goal> findByUserId(int userId) {
-        return null;
+        String sqlStatement = "Select * from goal where app_user_id = ?";
+        return jdbcTemplate.query(sqlStatement, new GoalMapper(), userId).stream()
+                .collect(Collectors.toList());
     }
 
     @Override
     public Goal createGoal(Goal goal) {
-        return null;
+        String sqlStatement = "insert into goal (`name`, checked, reason, realistic_deadline, ambitious_deadline, app_user_id) values (?, ?, ?, ?, ?, ?);";
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        int rowsAffected = jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sqlStatement, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, goal.getName());
+            ps.setBoolean(2, goal.isChecked());
+            ps.setString(3, goal.getReason());
+            ps.setString(4, goal.getRealisticDeadline());
+            ps.setString(5, goal.getAmbitiousDeadline());
+            ps.setInt(6, goal.getAppUserId());
+            return ps;
+        }, keyHolder);
+        if(rowsAffected <= 0){
+            return null;
+        }
+        goal.setGoalId(keyHolder.getKey().intValue());
+        return goal;
     }
 
     @Override
