@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -56,11 +57,21 @@ public class GoalJDBCTemplateRepository implements GoalRepository{
 
     @Override
     public boolean updateGoal(Goal goal) {
-        return false;
+        String sqlStatement = "update goal set " +
+                "`name` = ?, " +
+                "checked = ?, " +
+                "reason = ?, " +
+                "realistic_deadline = ?, " +
+                "ambitious_deadline = ? " +
+                "where goal_id = ?;";
+        return jdbcTemplate.update(sqlStatement, goal.getName(), goal.isChecked(),
+                goal.getReason(), goal.getRealisticDeadline(), goal.getAmbitiousDeadline(), goal.getGoalId()) > 0;
     }
 
     @Override
+    @Transactional
     public boolean deleteGoal(int goalId) {
-        return false;
+        jdbcTemplate.update("delete from stepping_stone where goal_id = ?;", goalId);
+        return jdbcTemplate.update("delete from goal where goal_id = ?;", goalId) > 0;
     }
 }

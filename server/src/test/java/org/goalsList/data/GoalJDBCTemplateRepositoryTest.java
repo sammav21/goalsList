@@ -61,10 +61,17 @@ class GoalJDBCTemplateRepositoryTest {
 
     @Test
     void updateGoal() {
+        Goal goalToUpdate = new Goal();
+        goalToUpdate.setGoalId(3);
+        goalToUpdate.setName("Vacation2");
+        goalToUpdate.setReason("updated goal");
+        assertTrue(repository.updateGoal(goalToUpdate));
+        assertEquals("updated goal", repository.findById(3).getReason());
     }
 
     @Test
     void deleteGoal() {
+        assertTrue(repository.deleteGoal(3));
     }
 
     private Goal createTestGoal(){
