@@ -1,6 +1,7 @@
 package org.goalsList.data;
 
 import org.goalsList.models.SteppingStone;
+import org.hamcrest.Condition;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,13 +50,32 @@ class SteppingStoneJDBCTemplateRepositoryTest {
 
     @Test
     void createSteppingStone() {
+        SteppingStone steppingStoneToAdd = createTestSteppingStone();
+        SteppingStone actual = repository.createSteppingStone(steppingStoneToAdd);
+        assertNotNull(actual);
+        assertEquals(4, actual.getSteppingStoneId());
     }
 
     @Test
     void updateSteppingStone() {
+        SteppingStone steppingStoneToUpdate = new SteppingStone();
+        steppingStoneToUpdate.setSteppingStoneId(3);
+        steppingStoneToUpdate.setName("updated");
+        steppingStoneToUpdate.setGoalId(3);
+        assertTrue(repository.updateSteppingStone(steppingStoneToUpdate));
+        assertEquals("updated", repository.findById(3).getName());
     }
 
     @Test
     void deleteSteppingStone() {
+        assertTrue(repository.deleteSteppingStone(3));
+    }
+
+    private SteppingStone createTestSteppingStone(){
+        SteppingStone newSteppingStone = new SteppingStone();
+        newSteppingStone.setName("added steppingStone");
+        newSteppingStone.setChecked(false);
+        newSteppingStone.setGoalId(3);
+        return newSteppingStone;
     }
 }

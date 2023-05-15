@@ -3,8 +3,12 @@ package org.goalsList.data;
 import org.goalsList.data.mappers.SteppingStoneMapper;
 import org.goalsList.models.SteppingStone;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,16 +35,34 @@ public class SteppingStoneJDBCTemplateRepository implements SteppingStoneReposit
 
     @Override
     public SteppingStone createSteppingStone(SteppingStone steppingStone) {
-        return null;
+        String sqlStatement = "insert into stepping_stone (`name`, checked, goal_id) values (?, ?, ?);";
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        int rowsAffected = jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sqlStatement, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, steppingStone.getName());
+            ps.setBoolean(2, steppingStone.isChecked());
+            ps.setInt(3, steppingStone.getGoalId());
+            return ps;
+        }, keyHolder);
+        if(rowsAffected <= 0){
+            return null;
+        }
+        steppingStone.setSteppingStoneId(keyHolder.getKey().intValue());
+        return steppingStone;
     }
 
     @Override
     public boolean updateSteppingStone(SteppingStone steppingStone) {
-        return false;
+        String sqlStatement = "update stepping_stone set " +
+                "`name` = ?, " +
+                "checked = ?, " +
+                "goal_id = ? " +
+                "where stepping_stone_id = ?;";
+        return jdbcTemplate.update(sqlStatement, steppingStone.getName(), steppingStone.isChecked(), steppingStone.getGoalId(), steppingStone.getSteppingStoneId()) > 0;
     }
 
     @Override
     public boolean deleteSteppingStone(int steppingStoneId) {
-        return false;
+        return jdbcTemplate.update("delete from stepping_stone where stepping_stone_id = ?;", steppingStoneId) > 0;
     }
 }
