@@ -1,17 +1,22 @@
 package org.goalsList.data;
 
 import org.goalsList.data.mappers.AppUserMapper;
+import org.goalsList.data.mappers.GoalMapper;
 import org.goalsList.models.AppUser;
+import org.goalsList.models.Goal;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
+@Repository
 public class AppUserJdbcTemplateRepository implements AppUserRepository{
 
     private final JdbcTemplate jdbcTemplate;
@@ -38,7 +43,7 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
     public AppUser findByUserId(int appUserId) {
         List<String> roles = getRolesByUserId(appUserId);
 
-        final String sqlStatement = "select app_user_id, username, password_hash, disabled "
+        final String sqlStatement = "select app_user_id, username, password_hash, enabled "
                 + "from app_user "
                 + "where app_user_id = ?;";
 
@@ -73,14 +78,33 @@ public class AppUserJdbcTemplateRepository implements AppUserRepository{
 
     @Override
     @Transactional
-    public void updateUser(AppUser user) {
+    public boolean updateUser(AppUser user) {
 
+        final String sqlStatement = "update app_user set "
+                + "username = ?, "
+                + "enabled = ? "
+                + "where app_user_id = ?";
+
+        boolean updated = jdbcTemplate.update(sqlStatement,
+                user.getUsername(), user.isEnabled(), user.getAppUserId()) > 0;
+
+        if (updated) {
+            updateRoles(user);
+        }
+        return updated;
     }
 
     @Override
     @Transactional
     public boolean deleteUser(int appUserId) {
-        return false;
+        List <Goal> goals = jdbcTemplate.query("Select * from goal where app_user_id = ?", new GoalMapper(), appUserId).stream()
+                .collect(Collectors.toList());
+        for(int i = 0; i < goals.size(); i++){
+            jdbcTemplate.update("delete from stepping_stone where goal_id = ?", goals.get(i).getGoalId());
+        }
+        jdbcTemplate.update("delete from goal where app_user_id = ?", appUserId);
+        jdbcTemplate.update("delete from app_user_role where app_user_id = ?", appUserId);
+        return jdbcTemplate.update("delete from app_user where app_user_id = ?", appUserId) > 0;
     }
 
 
