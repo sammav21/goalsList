@@ -1,6 +1,7 @@
 package org.goalsList.controllers;
 
 import org.goalsList.domain.AppUserService;
+import org.goalsList.domain.Result;
 import org.goalsList.models.AppUser;
 import org.goalsList.security.JwtConverter;
 import org.springframework.http.HttpStatus;
@@ -10,9 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -62,6 +61,35 @@ public class AuthController {
         map.put("jwt_token", jwtToken);
 
         return new ResponseEntity<>(map, HttpStatus.OK);
+    }
+
+    @PostMapping("/api/create_account")
+    public ResponseEntity<?> createAccount(@RequestBody Map<String, String> credentials) {
+
+        String username = credentials.get("username");
+        String password = credentials.get("password");
+
+        Result<AppUser> result = appUserService.createUser(username, password);
+
+        if(result.isSuccess()) {
+            HashMap<String, Integer> map = new HashMap<>();
+            map.put("appUserId", result.getPayload().getAppUserId());
+
+            return new ResponseEntity<>(map, HttpStatus.CREATED);
+        }
+        else {
+            return new ResponseEntity<>(result.getMessages(), HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+    @DeleteMapping("/api/delete_account/{appUserId}")
+    public ResponseEntity<Object> deleteAccount(@PathVariable int appUserId){
+        Result<AppUser> result = appUserService.deleteUser(appUserId);
+        if(result.isSuccess()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return ErrorResponse.build(result);
     }
 
 }
