@@ -64,4 +64,13 @@ insert into app_user_role
     (1, 1),
     (2, 1);
 
+insert into goal (`name`, checked, reason, realistic_deadline, ambitious_deadline, app_user_id) values
+		('Vacation', 0, 'Have fun', '2023-07-16', '2023-06-01', 1),
+        ('Vacation2', 0, 'Make money', '2023-08-16', '2023-07-01', 1),
+        ('new job', 0, 'Have fun', '2023-07-16', '2023-06-01', 2),
+        ('New job2', 0, 'Make money', '2023-08-16', '2023-07-01', 2);
+        
+	insert into stepping_stone(`name`, checked, goal_id) values
+		('Book a flight', 0, 1),
+        ('Update resume', 0, 2);
 select * from app_user;

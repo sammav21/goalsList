@@ -1,0 +1,25 @@
+@url = http://localhost:8080/api/goal
+@token= eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnb2Fscy1saXN0Iiwic3ViIjoic2FsbHlAam9uZXMuY29tIiwiYXBwX3VzZXJfaWQiOjIsImF1dGhvcml0aWVzIjoiVVNFUiIsImV4cCI6MTY4OTIwODY3NH0._IRG0XbWGrP3OD3v77lML0fWa0eTNe7JcGY8C-Utjl4
+
+GET {{url}}/2 HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+
+GET {{url}}/user/2 HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "RESTTest",
+    "checked": true,
+    "reason": "reason test",
+    "realistic_deadline": "fake date",
+    "ambitious_deadline": "fake date",
+    "app_user_id": 2
+}
