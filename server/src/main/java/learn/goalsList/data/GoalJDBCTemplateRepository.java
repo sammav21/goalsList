@@ -37,6 +37,7 @@ public class GoalJDBCTemplateRepository implements GoalRepository{
     @Override
     public Goal createGoal(Goal goal) {
         String sqlStatement = "insert into goal (`name`, checked, reason, realistic_deadline, ambitious_deadline, app_user_id) values (?, ?, ?, ?, ?, ?);";
+
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sqlStatement, Statement.RETURN_GENERATED_KEYS);

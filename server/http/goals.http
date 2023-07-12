@@ -1,5 +1,5 @@
 @url = http://localhost:8080/api/goal
-@token= eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnb2Fscy1saXN0Iiwic3ViIjoic2FsbHlAam9uZXMuY29tIiwiYXBwX3VzZXJfaWQiOjIsImF1dGhvcml0aWVzIjoiVVNFUiIsImV4cCI6MTY4OTIwODY3NH0._IRG0XbWGrP3OD3v77lML0fWa0eTNe7JcGY8C-Utjl4
+@token= eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnb2Fscy1saXN0Iiwic3ViIjoic2FsbHlAam9uZXMuY29tIiwiYXBwX3VzZXJfaWQiOjIsImF1dGhvcml0aWVzIjoiVVNFUiIsImV4cCI6MTY4OTMwMDY3MH0.4G3KTfzIN-wqJl9m0M9msKt-VZIdC0BwiKDFG6TztnM
 
 GET {{url}}/2 HTTP/1.1
 Authorization: Bearer {{token}}
@@ -19,7 +19,7 @@ Authorization: Bearer {{token}}
     "name": "RESTTest",
     "checked": true,
     "reason": "reason test",
-    "realistic_deadline": "fake date",
-    "ambitious_deadline": "fake date",
-    "app_user_id": 2
+    "realisticDeadline": "fake date",
+    "ambitiousDeadline": "fake date",
+    "appUserId": 2
 }
