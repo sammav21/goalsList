@@ -34,7 +34,7 @@ create table goal (
     realistic_deadline varchar(50),
     ambitious_deadline varchar(50),
     app_user_id int not null,
-	constraint fk_goal_app_user_id
+	constraint fk_goal_user_id
 		foreign key (app_user_id)
         references app_user(app_user_id)
 );
