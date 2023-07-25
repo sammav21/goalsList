@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
+import org.w3c.dom.events.Event;
 
 import java.util.List;
 
@@ -42,6 +43,27 @@ public class GoalController {
         Result<Goal> result = service.createGoal(goal);
         if(result.isSuccess()){
             return new ResponseEntity<>(result.getPayload(), HttpStatus.CREATED);
+        }
+        return ErrorResponse.build(result);
+    }
+
+    @PutMapping("/{goalId}")
+    public ResponseEntity<Object> updateGoal( @PathVariable int goalId, @RequestBody Goal goal){
+        if(goalId != goal.getGoalId()){
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        Result<Goal> result = service.updateGoal(goal);
+        if(result.isSuccess()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return ErrorResponse.build(result);
+    }
+
+    @DeleteMapping("/{goalId}")
+    public ResponseEntity<Object> deleteGoal(@PathVariable int goalId){
+        Result<Goal> result = service.deleteGoal(goalId);
+        if(result.isSuccess()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return ErrorResponse.build(result);
     }

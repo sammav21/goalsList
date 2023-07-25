@@ -1,5 +1,5 @@
 @url = http://localhost:8080/api/goal
-@token= eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnb2Fscy1saXN0Iiwic3ViIjoic2FsbHlAam9uZXMuY29tIiwiYXBwX3VzZXJfaWQiOjIsImF1dGhvcml0aWVzIjoiVVNFUiIsImV4cCI6MTY4OTMwMDY3MH0.4G3KTfzIN-wqJl9m0M9msKt-VZIdC0BwiKDFG6TztnM
+@token= eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnb2Fscy1saXN0Iiwic3ViIjoic2FsbHlAam9uZXMuY29tIiwiYXBwX3VzZXJfaWQiOjIsImF1dGhvcml0aWVzIjoiVVNFUiIsImV4cCI6MTY5MDQxMTg0OH0.CbeRdPIlwNPyDXUGRfiytLIyrOgwISuVqgcQzcBcMMg
 
 GET {{url}}/2 HTTP/1.1
 Authorization: Bearer {{token}}
@@ -23,3 +23,27 @@ Authorization: Bearer {{token}}
     "ambitiousDeadline": "fake date",
     "appUserId": 2
 }
+
+###
+
+PUT {{url}}/3 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "goalId": 3, 
+    "name": "UPATED REST",
+    "checked": false,
+    "reason": "UPDATED test",
+    "realisticDeadline": "UPDATED date",
+    "ambitiousDeadline": "UPDATED date",
+    "appUserId": 2 
+}
+
+###
+
+DELETE {{url}}/5 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+###
