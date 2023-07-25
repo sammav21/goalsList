@@ -1,0 +1,39 @@
+@url = http://localhost:8080/api/steppingStone
+
+@token= eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnb2Fscy1saXN0Iiwic3ViIjoic2FsbHlAam9uZXMuY29tIiwiYXBwX3VzZXJfaWQiOjIsImF1dGhvcml0aWVzIjoiVVNFUiIsImV4cCI6MTY5MDQxNDI3MH0.Ux92AQaKdpQuFF5snQvkrdRzzJ1HyM1VLmcqxDYj8XI
+
+GET {{url}}/2 HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
+
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "REST stone added",
+    "checked": true,
+    "goalId": 2
+}
+
+###
+
+PUT {{url}}/3 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "steppingStoneId": 3,
+    "name": "UPDATED REST",
+    "checked": false,
+    "goalId": 2
+}
+
+###
+
+DELETE {{url}}/4 HTTP/1.1
+Content-Type: application/json 
+Authorization: Bearer {{token}}
+
+###

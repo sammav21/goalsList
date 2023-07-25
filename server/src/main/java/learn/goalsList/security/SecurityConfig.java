@@ -27,15 +27,19 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST, "/api/authenticate", "/api/create_account").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/refresh_token").authenticated()
                 .antMatchers(HttpMethod.GET,
+                        "/api/goal/user/*",
                         "/api/goal/*",
-                        "/api/goal/user/*").hasAnyAuthority("USER", "ADMIN")
+                        "/api/steppingStone/*").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers(HttpMethod.POST,
-                        "/api/goal").hasAnyAuthority("USER", "ADMIN")
+                        "/api/goal",
+                        "/api/steppingStone").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers(HttpMethod.PUT,
-                        "/api/goal/*").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers(HttpMethod.DELETE,
                         "/api/goal/*",
-                        "/api/delete_account/*").hasAnyAuthority("USER", "ADMIN")
+                        "/api/steppingStone/*").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.DELETE,
+                        "/api/delete_account/*",
+                        "/api/goal/*",
+                        "/api/steppingStone/*").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/**").denyAll()
                 .and()
                 .addFilter(new JwtRequestFilter(authenticationManager(authConfig), converter))
