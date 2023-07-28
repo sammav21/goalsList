@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import jwtDecode from 'jwt-decode';
 import LoginCard from './components/login/LoginCard';
+import Main from './components/goals/Main';
 import UserContext from './context/UserContext';
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
 
   const [user, setUser] = useState(null);
   const [goals, setGoals] = useState([]);
+  {/*need another call for stepping stone related to goal id (here or in goal component?)*/}
 
   const login = (token) => {
     const {sub: username, app_user_id: userId, authorities: authoritiesString} = jwtDecode(token);
@@ -59,9 +61,8 @@ function App() {
 
   return (
     <UserContext.Provider value={authorities}>
-    <div className="App">
-      <LoginCard url= {url} />
-    </div>
+    {user == null && <LoginCard url= {url} />}
+    <Main goals={goals}/>
     </UserContext.Provider>
   );
 }

@@ -1,0 +1,145 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  min-height: 100vh;
+  background-image: linear-gradient(230deg, #558B6E, #E0EDC5);
+  font-family: 'Poiret One', cursive;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header, .list-section, .goalForm{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header{
+  font-size: 3rem;
+  height: 35vh;
+  color:#4B5C4E;
+  text-shadow: -1px 0px #E0EDC5;
+}
+
+.goalForm{
+  border-top: #558B6E solid 1px;
+  padding: 10px;
+  border-radius: 50px;
+  margin: auto;
+  width: 500px;
+}
+
+.input-section{
+  border: solid 1px #E0EDC5;
+  border-radius: 50px;
+  padding-left: 30px;
+  display: flex;
+  align-items: center;
+}
+
+input,button{
+  border: none;
+}
+
+input{
+  width: 300px;
+  height: 50px;
+  outline: none;
+  background-color: transparent;
+  color: #4B5C4E;
+  font-family: 'Poiret One', cursive;
+  font-weight: 800;
+  font-size: 23px;
+}
+
+.add{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #E0EDC5;
+}
+
+#addIcon{
+  font-size: 22px;
+  color: #4B5C4E;
+}
+
+.add:hover{
+  cursor: pointer;
+}
+
+/*loginCard*/
+
+.loginScreen{
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px black solid;
+  background-color: rgba(101, 101, 101, 0.537);
+  backdrop-filter: blur(2px);
+}
+.loginForm{
+  border: 1px black solid;
+  background-color: #E0EDC5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*growing list section */
+.list-section{
+  width: 500px;
+  min-height: 100px;
+  margin: auto;
+  padding-bottom: 30px;
+  border: solid 1px #558B6E;
+  border-top: none;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+.list{
+  width: 500px;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;  
+}
+
+.listContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px 0 0 0;
+}
+
+.listDiv{
+  width: 75%;
+  border: #E0EDC5 3px solid;
+  border-radius: 10px;
+  color: #4B5C4E;
+  display: flex;
+  align-items: center;
+  padding-left: 5px;
+  margin: 5px;
+  padding: 5px;
+}
+
+.list-text{
+  font-size: 25px;
+  font-weight: 600;
+  list-style: none;
+  flex: 1; 
+  margin: 0 0 0 5px;   
+}

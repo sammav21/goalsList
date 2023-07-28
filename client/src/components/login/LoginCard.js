@@ -2,6 +2,7 @@ import { useContext, useState } from "react"
 import UserContext from "../../context/UserContext";
 
 export default function LoginCard(props){
+
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -26,8 +27,8 @@ export default function LoginCard(props){
         }
     }
     return(
-        <div className="loginCard">
-            <form onSubmit= {handleSubmit}>
+        <div className="loginScreen">
+            <form onSubmit= {handleSubmit} className="loginForm"> {/* component*/}
                 <div className="inputSection">
                 <label htmlFor="usernameInput">Username:</label>
                 <input className="loginInput" id="usernameInput" value={username} type="text" onChange={(e) => setUsername(e.target.value)} />
