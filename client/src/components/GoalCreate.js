@@ -5,7 +5,7 @@ export default function  GoalCreate(props){
 
     const authorities = useContext(UserContext);
 
-    const goalTemplate = {
+    const template = {
         name: "",
         checked: false,
         reason: "",
@@ -14,7 +14,7 @@ export default function  GoalCreate(props){
         appUserId: null
     }
 
-    const [goal, setGoal] = useState(goalTemplate);
+    const [goal, setGoal] = useState(template);
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = async(e) => {
@@ -33,7 +33,7 @@ export default function  GoalCreate(props){
         });
         if(response.status >= 200 && response.status <= 300){
             props.refreshData();
-            setGoal(goalTemplate);
+            setGoal(template);
             setErrors([]);
         } else{
             const error = await response.json();
@@ -43,7 +43,7 @@ export default function  GoalCreate(props){
 
     return (
         <form className="goalForm" onSubmit={handleSubmit}> 
-            <div  className="input-section">
+            <div className="input-section">
                 <input type="text" className="goalInput" value={goal.name} onChange={(e) => {setGoal({...goal, name: e.target.value})}}/>
                 <input type="submit" className="add"></input>
             </div>
