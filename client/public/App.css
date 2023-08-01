@@ -116,7 +116,7 @@ input{
   align-items: center;  
 }
 
-.listContainer{
+.goalContainer{
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -124,7 +124,7 @@ input{
   margin: 5px 0 0 0;
 }
 
-.listDiv{
+.titleDiv{
   width: 75%;
   border: #E0EDC5 3px solid;
   border-radius: 10px;
@@ -136,7 +136,7 @@ input{
   padding: 5px;
 }
 
-.list-text{
+.titleText{
   font-size: 25px;
   font-weight: 600;
   list-style: none;
