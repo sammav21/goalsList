@@ -1,8 +1,7 @@
 import { useContext, useState } from "react"
-import UserContext from "../../context/UserContext";
+import UserContext from "../context/UserContext";
 
-export default function LoginCard(props){
-
+export default function LoginCard(){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -11,7 +10,7 @@ export default function LoginCard(props){
     const handleSubmit = async(e) => {
         e.preventDefault();
 
-        const response = await fetch(`${props.url}/authenticate`, {
+        const response = await fetch(`${authorities.url}/authenticate`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -27,7 +26,6 @@ export default function LoginCard(props){
         }
     }
     return(
-        <div className="loginScreen">
             <form onSubmit= {handleSubmit} className="loginForm"> {/* component*/}
                 <div className="inputSection">
                 <label htmlFor="usernameInput">Username:</label>
@@ -41,6 +39,5 @@ export default function LoginCard(props){
                     <input type="submit" value="Login" />
                 </div>
             </form>
-        </div>
     )
 }

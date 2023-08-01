@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import jwtDecode from 'jwt-decode';
-import LoginCard from './components/login/LoginCard';
-import Main from './components/goals/Main';
+import LoginPage from './layout/LoginPage';
+import MainPage from './layout/MainPage';
 import UserContext from './context/UserContext';
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
 
   const [user, setUser] = useState(null);
   const [goals, setGoals] = useState([]);
+  const [reloadUser, setReloadUser] = useState(false);
   {/*need another call for stepping stone related to goal id (here or in goal component?)*/}
 
   const login = (token) => {
@@ -58,11 +59,17 @@ function App() {
   }
 
   useEffect(refreshData, [user])
+  useEffect(() => {
+    if(localStorage.getItem("userToken") != null){
+      login(localStorage.getItem("userToken"))
+    }
+    setReloadUser(true)
+  }, [])
 
   return (
     <UserContext.Provider value={authorities}>
-    {user == null && <LoginCard url= {url} />}
-    <Main goals={goals}/>
+    {user == null && <LoginPage />}
+    <MainPage refreshData={refreshData} goals={goals}/>
     </UserContext.Provider>
   );
 }
