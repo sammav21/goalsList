@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
 import UserContext from "../context/UserContext";
 
-export default function  GoalCreate(props){
+export default function PostData(props){
 
     const isGoal = props.isGoal;
     let template;
@@ -59,7 +59,7 @@ export default function  GoalCreate(props){
             },
             body: JSON.stringify(details)
         });
-        console.log(url);
+
         if(response.status >= 200 && response.status <= 300){
             refresh();
             setDetails(template);
@@ -73,7 +73,7 @@ export default function  GoalCreate(props){
         <div className={isGoal ? "goalForm" : "steppingStoneForm"}> 
             <div  className="input-section" >
                 <input type="text" className="goalInput" value={details.name} onChange={(e) => {setDetails({...details, name: e.target.value})}}/>
-                <input type="submit" className="add" onClick={handleSubmit}></input>
+                <input type="submit" className="add" onClick={handleSubmit} value="+"></input>
             </div>
             {errors.length > 0 && <p>{errors}</p>}
         </div>

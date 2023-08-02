@@ -51,8 +51,9 @@ export default function SteppingStoneCreate(props){
             },
             body: JSON.stringify(details)
         });
+        console.log(url);
         if(response.status >= 200 && response.status <= 300){
-            props.refreshData();
+            props.refreshSteppingStones();
             setDetails(template);
             setErrors([]);
         } else{
@@ -61,12 +62,12 @@ export default function SteppingStoneCreate(props){
         }
     }
     return(
-        <form className={isGoal ? "goalForm" : "steppingStoneForm"} onSubmit={handleSubmit}> 
-            <div  className="input-section">
+        <div className={isGoal ? "goalForm" : "steppingStoneForm"}> 
+            <div  className="input-section" >
                 <input type="text" className="goalInput" value={details.name} onChange={(e) => {setDetails({...details, name: e.target.value})}}/>
-                <input type="submit" className="add"></input>
+                <input type="submit" className="add" onClick={handleSubmit}></input>
             </div>
             {errors.length > 0 && <p>{errors}</p>}
-        </form>
+        </div>
     )
 }

@@ -54,7 +54,6 @@ function App() {
       })
       .then((response) => response.json())
       .then((data) => setGoals(data))
-      console.log(goals)
     }
   }
 
