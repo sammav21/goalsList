@@ -1,5 +1,6 @@
 import GoalCreate from "../components/GoalCreate"
 import GoalsList from "../components/ListedGoals/GoalsList"
+import PostData from "../components/PostData"
 
 export default function MainPage(props){
     return(
@@ -7,8 +8,8 @@ export default function MainPage(props){
         <header>
             <h1>Goals</h1>
         </header>
-        <GoalCreate refreshData={props.refreshData} goal={true}/>
-        <GoalsList goals={props.goals} />
+        <PostData refreshData={props.refreshData} isGoal={true}/>
+        <GoalsList goals={props.goals} refreshData={props.refreshData} />
     </>
     )
 }

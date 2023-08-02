@@ -143,3 +143,7 @@ input{
   flex: 1; 
   margin: 0 0 0 5px;   
 }
+
+.detailsForm{
+  border: solid 1px black;
+}

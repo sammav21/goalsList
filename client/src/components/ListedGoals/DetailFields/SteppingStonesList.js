@@ -1,10 +1,10 @@
 export default function SteppingStonesList(props){
     return(
-        <div className="list-section">
+        <div>
             <ul className="list">
                 {props.steppingStones.map((steppingStone) => {
                     return(
-                        <p>{steppingStone.name}</p>
+                        <p key={steppingStone.steppingStoneId}>{steppingStone.name}</p>
                     )
                 })}
             </ul>
