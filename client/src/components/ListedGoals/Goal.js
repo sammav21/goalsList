@@ -7,16 +7,10 @@ export default function Goal(props){
     const [openDetails, setOpenDetails] = useState("");
 
     return(
-        <>
-        {props.goals.map((goal) => {
-            return( 
-            <div className="goalContainer" key={goal.goalId}>
-                <GoalTitle goal={goal} refreshData={props.refreshData} openDetails={openDetails} setOpenDetails={setOpenDetails}/>{/* will come across issue where the button in this component needs to affect the display of the next component below*/}
-                {openDetails == goal.goalId && <GoalDetails goal={goal} refreshData={props.refreshData} setOpenDetails={setOpenDetails}/>}
-                
+            <div className="goalContainer" key={props.goal.goalId}>
+                <GoalTitle goal={props.goal} refreshData={props.refreshData} openDetails={openDetails} setOpenDetails={setOpenDetails}/>
+                {openDetails === props.goal.goalId 
+                && <GoalDetails goal={props.goal} refreshData={props.refreshData} setOpenDetails={setOpenDetails}/>}
             </div>
-            )
-        })}
-        </>
     )
 }

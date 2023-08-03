@@ -1,4 +1,3 @@
-import GoalCreate from "../components/GoalCreate"
 import GoalsList from "../components/ListedGoals/GoalsList"
 import PostData from "../components/PostData"
 
