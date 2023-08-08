@@ -1,5 +1,6 @@
 import { useContext, useState } from "react"
 import UserContext from "../context/UserContext";
+import Errors from "./Errors";
 
 export default function PostData(props){
 
@@ -71,11 +72,11 @@ export default function PostData(props){
     }
     return(
         <div className={isGoal ? "goalForm" : "steppingStoneForm"}> 
-            <div  className="input-section" >
-                <input type="text" className="goalInput" value={details.name} onChange={(e) => {setDetails({...details, name: e.target.value})}}/>
-                <input type="submit" className="add" onClick={handleSubmit} value="+"></input>
+            <div  className="inputSection" >
+                <input type="text" className={isGoal ? "goalInput" : "steppingStoneInput"} value={details.name} onChange={(e) => {setDetails({...details, name: e.target.value})}}/>
+                <input type="submit" className="addButton" onClick={handleSubmit} value="+"></input>
             </div>
-            {errors.length > 0 && <p>{errors}</p>}
+            <Errors errors={errors}/>
         </div>
     )
 }

@@ -2,7 +2,7 @@ import Goal from "./Goal";
 
 export default function GoalsList(props){
     return (
-        <div className="list-section">
+        <div className="listSection">
             <ul className="list">
             {props.goals.map((goal) => {
             return(
