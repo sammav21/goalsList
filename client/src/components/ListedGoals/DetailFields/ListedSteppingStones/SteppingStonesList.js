@@ -3,7 +3,7 @@ import SteppingStone from "./SteppingStone";
 export default function SteppingStonesList(props){
 
     return(
-        <div>
+        <div className="steppingStoneListSection">
             <ul className="list">
                 {props.steppingStones.map((steppingStone) => {
                     return(

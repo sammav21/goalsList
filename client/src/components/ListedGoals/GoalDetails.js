@@ -3,6 +3,7 @@ import Reason from "./DetailFields/Reason";
 import UserContext from "../../context/UserContext";
 import Deadline from "./DetailFields/Deadline";
 import SteppingStoneDetails from "./DetailFields/ListedSteppingStones/SteppingStoneDetails";
+import Errors from "../Errors";
 
 export default function GoalDetails(props){
     /*should this component hold state for the smaller details to control once in an PUT call?*/
@@ -52,7 +53,7 @@ export default function GoalDetails(props){
             <Deadline ambitious={false} setUpdatedFields={setUpdatedFields} updatedFields={updatedFields} />
             <input type="submit" value="Update" />
             <button type="button" onClick={() => props.setOpenDetails(null)}>cancel</button>
-            {errors.length > 0 && <p>{errors}</p>}
+            <Errors errors={errors}/>
         </form>
     )
 }

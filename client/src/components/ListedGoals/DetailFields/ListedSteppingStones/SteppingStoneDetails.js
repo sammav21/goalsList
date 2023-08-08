@@ -24,7 +24,7 @@ export default function SteppingStoneDetails(props){
 
     useEffect(refreshSteppingStones, [steppingStones])
     return(
-        <div>
+        <div className="steppingStoneContainer">
             <PostData isGoal={false} goal={props.goal} refreshSteppingStones={refreshSteppingStones}/>
             <SteppingStonesList steppingStones={steppingStones} refreshSteppingStones={refreshSteppingStones}/>
         </div>

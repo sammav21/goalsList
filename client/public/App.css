@@ -13,7 +13,95 @@ body{
   align-items: center;
 }
 
-header, .list-section, .goalForm{
+input,button{
+  border: none;
+}
+
+/*loginCard*/
+
+.loginScreen{
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(101, 101, 101, 0.537);
+  backdrop-filter: blur(2px);
+}
+.loginCard{
+  border-radius: 10px;
+  width: 35vw;
+  height: 50vh;
+  background-color: #E0EDC5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginTitle{
+  margin-bottom: 15px;
+}
+
+.loginForm{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginInputSection{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
+}
+.loginInput{
+  height: 7vh;
+  outline: none;
+  border-radius: 10px;
+  color: #4B5C4E;
+  font-family: 'Poiret One', cursive;
+  font-weight: 800;
+  font-size: 1.5rem;
+  margin-bottom: 3%;
+  padding-left: 10px;
+}
+.loginInputButton{
+  min-width: 10vw;
+  height: 7vh;
+  padding: 0 1vw;
+  background-color:#4B5C4E;
+  border-radius: 20px;
+  font-family: 'Poiret One', cursive;
+  font-size: 1.3rem;
+}
+
+.createAccountDiv{
+  width: 90%;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.createAccountButton{
+  background-color: transparent;
+  font-family: 'Poiret One', cursive;
+  font-size: 1.1rem;
+  border-bottom: .5px solid #4B5C4E;
+}
+
+.loginInputButton:hover, .createAccountButton:hover{
+  cursor: pointer;
+}
+
+/*main page*/
+
+header, .goalForm{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,23 +118,18 @@ header{
   padding: 10px;
   border-radius: 50px;
   margin: auto;
-  width: 500px;
 }
 
-.input-section{
+.inputSection{
   border: solid 1px #E0EDC5;
   border-radius: 50px;
-  padding-left: 30px;
+  padding-left: 15px;
   display: flex;
   align-items: center;
 }
 
-input,button{
-  border: none;
-}
-
-input{
-  width: 300px;
+.goalInput{
+  width: 350px;
   height: 50px;
   outline: none;
   background-color: transparent;
@@ -56,51 +139,28 @@ input{
   font-size: 23px;
 }
 
-.add{
-  width: 50px;
-  height: 50px;
+.goalAddButton, .steppingStoneAddButton{
   border-radius: 50%;
   background-color: #E0EDC5;
-}
-
-#addIcon{
-  font-size: 22px;
   color: #4B5C4E;
 }
 
-.add:hover{
+.goalAddButton{
+  width: 50px;
+  height: 50px;
+}
+
+.goalAddButton:hover, .steppingStoneAddButton:hover{
   cursor: pointer;
 }
 
-/*loginCard*/
-
-.loginScreen{
-  height: 100vh;
-  width: 100vw;
-  position: absolute;
-  left: 0;
-  top: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px black solid;
-  background-color: rgba(101, 101, 101, 0.537);
-  backdrop-filter: blur(2px);
-}
-.loginForm{
-  border: 1px black solid;
-  background-color: #E0EDC5;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 /*growing list section */
-.list-section{
+.listSection{
   width: 500px;
   min-height: 100px;
   margin: auto;
-  padding-bottom: 30px;
+  padding: 20px 0 20px 0;
   border: solid 1px #558B6E;
   border-top: none;
   border-bottom-left-radius: 50px;
@@ -108,8 +168,6 @@ input{
 }
 
 .list{
-  width: 500px;
-  padding-top: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -121,29 +179,139 @@ input{
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 5px 0 0 0;
+  margin: 0 0 5px 0;
 }
 
 .titleDiv{
-  width: 75%;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  margin: 5px;
+  padding: 5px;
   border: #E0EDC5 3px solid;
   border-radius: 10px;
   color: #4B5C4E;
-  display: flex;
-  align-items: center;
-  padding-left: 5px;
-  margin: 5px;
-  padding: 5px;
 }
 
 .titleText{
-  font-size: 25px;
-  font-weight: 600;
   list-style: none;
   flex: 1; 
-  margin: 0 0 0 5px;   
+  margin: 0 0 0 5px;
+  font-size: 1.5rem;
+  font-weight: 600;  
 }
 
+.listButton{
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  margin: 0px 10px;
+  color: #354137;
+}
+.listButton:hover{
+  cursor: pointer;
+  background-color: #E0EDC5;
+  border-radius: 5px;
+  transition: .25s;
+}
+
+/*details section*/
 .detailsForm{
-  border: solid 1px black;
+  width: 90%;
+  margin: 5px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  background-color: #4B5C4E;
+  border-radius: 10px;
+  color: #E0EDC5;
+  font-size: 23px;
+  box-shadow: 6px 6px #3b483d;
+}
+/*reason section*/
+.reasonDiv, .steppginStoneContainer{
+  width: 90%;
+  max-height: auto;
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0 0 0;
+}
+
+.reasonInput{
+    width: 100%;
+    min-height: 100px;
+    margin-top: 5px;
+    padding-left: 5px;
+    outline: none;
+    background: #4B5C4E;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Poiret One', cursive;
+    color: #E0EDC5;
+    overflow:auto;
+    border: 2px solid #E0EDC5;;
+    resize: none;
+}
+
+.reasonInput:focus{
+  background-color: #E0EDC5;
+  color: #3b483d;
+}
+
+.reasonInput::-webkit-scrollbar{
+  background-color: #3b483d;
+  width: 10px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.reasonInput::-webkit-scrollbar-thumb{
+  background-color: #E0EDC5;
+  height: 10px;
+  border-radius: 1px;
+}
+
+/*Stepping stones section*/
+
+.steppingStoneForm{
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.steppingStoneInput{
+  height: 30px;
+  width: 300px;
+  outline: none;
+  background-color: transparent;
+  color: #E0EDC5;
+  font-family: 'Poiret One', cursive;
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.steppingStoneAddButton{
+  width: 30px;
+  height: 30px;
+}
+
+.steppingStoneListSection{
+  width: 100%;
+  min-height: 30px;
+  margin: auto;
+  padding: 20px 0 20px 0;
+}
+
+.steppingStoneDiv{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 5px;
+  padding: 5px;
+  background-color: #E0EDC5;
+  border-radius: 10px;
+  color: #4B5C4E;
+
 }
