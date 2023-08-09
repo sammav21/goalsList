@@ -51,9 +51,12 @@ export default function GoalDetails(props){
             <SteppingStoneDetails goal={props.goal} />
             <Deadline ambitious={true} setUpdatedFields={setUpdatedFields} updatedFields={updatedFields} />
             <Deadline ambitious={false} setUpdatedFields={setUpdatedFields} updatedFields={updatedFields} />
-            <input type="submit" value="Update" />
-            <button type="button" onClick={() => props.setOpenDetails(null)}>cancel</button>
             <Errors errors={errors}/>
+            <div className="detailBtnsDiv">
+            <input type="submit" value="Update" className="detailBtn" id="update"/>
+            <button type="button" className="detailBtn" id="cancel" onClick={() => props.setOpenDetails(null)}>Cancel</button>
+            </div>
+            
         </form>
     )
 }

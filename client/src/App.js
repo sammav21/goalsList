@@ -36,6 +36,7 @@ function App() {
   const logout = () =>{
     setUser(null);
     window.localStorage.removeItem("userToken");
+    window.location.reload(false);
   }
 
   const authorities = {
