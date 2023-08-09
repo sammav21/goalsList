@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import UserContext from "../../context/UserContext";
 
 export default function GoalTitle(props){
@@ -39,20 +39,22 @@ export default function GoalTitle(props){
     
         if(response.status >= 200 && response.status <= 300){
             props.refreshData();
-            console.log(props.goal);
+            if(props.openDetails === props.goal.goalId){
+                props.setOpenDetails(null)
+            }
           } 
     }
 
 
     return(
-        <div className="titleDiv">
+        <div className={props.goal.checked ? "titleDiv checkedGoal" : "titleDiv"}>
                     <h3 className="titleText">{props.goal.name}</h3>
                     {/*component for buttons?*/}
-                    <button className="listButton closed" onClick={props.openDetails !== props.goal.goalId 
+                    <button className="listBtn" onClick={handleChecked}><i className={props.goal.checked ? "fa-solid fa-check-double" : "fa-solid fa-check" }id="check"></i></button>
+                    <button className={props.goal.checked ? "listBtn checkedHide" : "listBtn" } onClick={props.openDetails !== props.goal.goalId 
                         ? () => props.setOpenDetails(props.goal.goalId) 
                         : () => props.setOpenDetails(null)}><i className="fa-solid fa-caret-down" id="details"></i></button>
-                    <button className="listButton check" onClick={handleChecked}><i className="fa-solid fa-check"id="check"></i></button>
-                    <button className="listButton remove" onClick={handleDelete}><i className="fa-solid fa-minus" id="remove"></i></button>
+                    <button className={props.goal.checked ? "listBtn checkedHide" : "listBtn delete" } onClick={handleDelete}><i className="fa-solid fa-trash-can" id="remove"></i></button>
         </div>
     )
 }

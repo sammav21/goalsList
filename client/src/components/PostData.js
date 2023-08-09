@@ -71,7 +71,8 @@ export default function PostData(props){
         }
     }
     return(
-        <div className={isGoal ? "goalForm" : "steppingStoneForm"}> 
+        <div className={isGoal ? "goalForm" : "steppingStoneForm"}>
+            {!isGoal && <p>What steps can you take?</p>}
             <div  className="inputSection" >
                 <input type="text" className={isGoal ? "goalInput" : "steppingStoneInput"} value={details.name} onChange={(e) => {setDetails({...details, name: e.target.value})}}/>
                 <input type="submit" className={isGoal ? "goalAddButton" : "steppingStoneAddButton" }onClick={handleSubmit} value="+"></input>

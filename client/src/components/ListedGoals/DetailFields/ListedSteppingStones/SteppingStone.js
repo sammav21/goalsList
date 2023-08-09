@@ -40,10 +40,10 @@ export default function SteppingStone(props){
           }
     }
     return (
-        <div className="steppingStoneDiv">
-            <p>{props.steppingStone.name}</p>
-            <button className="listButton check" onClick={handleChecked}><i className="fa-solid fa-check"id="check"></i></button>
-            <button className="listButton remove" onClick={handleDelete}><i className="fa-solid fa-minus" id="remove"></i></button>
+        <div className={props.steppingStone.checked ? "steppingStoneDiv checkedSteppingStone" : "steppingStoneDiv" }>
+            <p className="steppingStoneTitleText">{props.steppingStone.name}</p>
+            <button className="listBtnS checkS" onClick={handleChecked}><i className={props.steppingStone.checked ? "fa-solid fa-check-double" : "fa-solid fa-check"} ></i></button>
+            <button className={props.steppingStone.checked ? "listBtnS checkedHide" : "listBtnS delete" } onClick={handleDelete}><i className="fa-solid fa-trash-can"></i></button>
         </div>
     )
 }

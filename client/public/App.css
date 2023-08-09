@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+#root{
+  width: 100vw;
+}
+
 body{
   min-height: 100vh;
   background-image: linear-gradient(230deg, #558B6E, #E0EDC5);
@@ -11,6 +15,18 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar{
+  background-color: #3b483d;
+  width: 5px;
+}
+
+body::-webkit-scrollbar-thumb{
+  background-color: #E0EDC5;
+  height: 10px;
+  border-radius: 1px;
 }
 
 input,button{
@@ -25,6 +41,7 @@ input,button{
   position: absolute;
   left: 0;
   top: 0;
+  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,6 +61,10 @@ input,button{
 
 .loginTitle{
   margin-bottom: 15px;
+  font-family: 'Poiret One', cursive;
+  color:#354137;
+  font-size: 2rem;
+  font-weight: 100;
 }
 
 .loginForm{
@@ -75,7 +96,9 @@ input,button{
   min-width: 10vw;
   height: 7vh;
   padding: 0 1vw;
+  margin: 10px 0;
   background-color:#4B5C4E;
+  color: #e0edc4;
   border-radius: 20px;
   font-family: 'Poiret One', cursive;
   font-size: 1.3rem;
@@ -101,19 +124,45 @@ input,button{
 
 /*main page*/
 
-header, .goalForm{
+header{
+  position: absolute;
+  top: 2%;
+  right: 5%;
+}
+
+.logoutText{
+  font-size: 1.1rem;
+  color: #e0edc4;
+  padding: 3px;
+  border-bottom: 1px solid #e0edc4;
+  background: linear-gradient(to top, #e0edc4 50%, transparent 0%);
+  background-size: 200% 200%;
+  background-position: top;
+  transition: all .2s ease-in;
+}
+
+.logoutText:hover{
+  cursor: pointer;
+  background-position: bottom;
+  border-radius: 5px;
+  color: #354137;
+}
+
+.pageTitleDiv, .goalForm{
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
-header{
+.pageTitleDiv{
   font-size: 3rem;
-  height: 35vh;
+  height: 25vh;
   color:#4B5C4E;
   text-shadow: -1px 0px #E0EDC5;
 }
 
 .goalForm{
+  width: 85%;
   border-top: #558B6E solid 1px;
   padding: 10px;
   border-radius: 50px;
@@ -121,15 +170,17 @@ header{
 }
 
 .inputSection{
-  border: solid 1px #E0EDC5;
-  border-radius: 50px;
   padding-left: 15px;
+  margin-top: 5px;
   display: flex;
   align-items: center;
+  border: solid 1px #E0EDC5;
+  border-radius: 50px;
+  
 }
 
 .goalInput{
-  width: 350px;
+  width: 40vw;
   height: 50px;
   outline: none;
   background-color: transparent;
@@ -157,10 +208,10 @@ header{
 
 /*growing list section */
 .listSection{
-  width: 500px;
+  width: 85%;
   min-height: 100px;
   margin: auto;
-  padding: 20px 0 20px 0;
+  padding: 10px 0 10px 0;
   border: solid 1px #558B6E;
   border-top: none;
   border-bottom-left-radius: 50px;
@@ -169,13 +220,13 @@ header{
 
 .list{
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;  
+  align-items:start;  
 }
 
 .goalContainer{
-  width: 100%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -184,6 +235,7 @@ header{
 
 .titleDiv{
   width: 80%;
+  height: 100px;
   display: flex;
   align-items: center;
   margin: 5px;
@@ -193,43 +245,69 @@ header{
   color: #4B5C4E;
 }
 
+.checkedGoal{
+  background-color: #4B5C4E;
+  box-shadow: 4px 4px #3b483d;
+  color: #e0edc4;
+  border: none;
+}
+
 .titleText{
-  list-style: none;
   flex: 1; 
   margin: 0 0 0 5px;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   font-weight: 600;  
 }
 
-.listButton{
+.listBtn, .listBtnS{
   width: 20px;
   height: 20px;
   background-color: transparent;
   margin: 0px 10px;
-  color: #354137;
+  color: #3b483d;
+  font-size: 1rem;
 }
-.listButton:hover{
+
+.listBtn:hover{
   cursor: pointer;
-  background-color: #E0EDC5;
-  border-radius: 5px;
-  transition: .25s;
+  color: #E0EDC5;
+  transition: 1s;
+}
+
+.delete:hover{
+  color: rgb(211, 28, 28);
+}
+
+.fa-check-double{
+  color: #E0EDC5;
+}
+
+.fa-check-double:hover{
+  color: #3b483d;
+  transition: 1s;
+}
+
+.checkedHide{
+  display: none;
 }
 
 /*details section*/
 .detailsForm{
   width: 90%;
   margin: 5px 0 0 0;
+  padding-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center; 
   background-color: #4B5C4E;
   border-radius: 10px;
   color: #E0EDC5;
-  font-size: 23px;
+  font-size: 1.5rem;
+  font-weight: 600;
   box-shadow: 6px 6px #3b483d;
 }
 /*reason section*/
-.reasonDiv, .steppginStoneContainer{
+.reasonDiv{
   width: 90%;
   max-height: auto;
   display: flex;
@@ -245,8 +323,7 @@ header{
     outline: none;
     background: #4B5C4E;
     border-radius: 8px;
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 1.2rem;
     font-family: 'Poiret One', cursive;
     color: #E0EDC5;
     overflow:auto;
@@ -274,8 +351,8 @@ header{
 
 /*Stepping stones section*/
 
-.steppingStoneForm{
-  width: 100%;
+.steppingStoneSection{
+  width: 90%;
   margin-top: 10px;
   display: flex;
   flex-direction: column;
@@ -283,29 +360,28 @@ header{
 
 .steppingStoneInput{
   height: 30px;
-  width: 300px;
+  width: 91%;
   outline: none;
   background-color: transparent;
   color: #E0EDC5;
   font-family: 'Poiret One', cursive;
-  font-weight: 800;
   font-size: 1.2rem;
 }
 
 .steppingStoneAddButton{
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
 }
 
 .steppingStoneListSection{
   width: 100%;
   min-height: 30px;
   margin: auto;
-  padding: 20px 0 20px 0;
+  padding: 10px 0 10px 0;
 }
 
 .steppingStoneDiv{
-  width: 100%;
+  width: 80%;
   display: flex;
   align-items: center;
   margin: 5px;
@@ -313,5 +389,167 @@ header{
   background-color: #E0EDC5;
   border-radius: 10px;
   color: #4B5C4E;
+}
+
+.checkedSteppingStone{
+  background-color: #558B6E;
+  box-shadow: #3b483d 2px 2px;
+  color: #e0edc4;
+}
+.steppingStoneTitleText{
+  flex: 1; 
+  margin: 0 0 0 5px;
+  font-size: 1.2rem;
+  font-weight: 600; 
+}
+
+.listBtnS:hover{
+  cursor: pointer;
+  transition: 1s;
+}
+
+.checkS:hover{
+  color: #43a570;
+}
+/*deadlines*/
+
+.deadlineDiv{
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+  padding-bottom: 5px;
+  border-bottom:double 2px #e0edc4;
+}
+
+.dateInput{
+  background-color: transparent;
+  color: #e0edc4;
+  outline: none;
+  font-family: 'Poiret One', cursive;
+  font-size: 1.2rem;
+}
+
+.dateInput::-webkit-calendar-picker-indicator{
+  font-size: 1.1rem;
+  background-color: #e0edc4;
+  border-radius: 3px;
+}
+
+.dateInput:hover, .dateInput::-webkit-calendar-picker-indicator:hover{
+  cursor: pointer;
+}
+
+.dateInput::-webkit-datetime-edit-day-field:focus,
+.dateInput::-webkit-datetime-edit-month-field:focus,
+.dateInput::-webkit-datetime-edit-year-field:focus {
+    background-color: #3b483d;
+    color: #e0edc4;
+    border-radius: 3px;
+}
+
+.detailBtnsDiv{
+  width: 90%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.detailBtn{
+  margin: 15px 0;
+  width: 8rem;
+  height: 2rem;
+  font-family: 'Poiret One', cursive;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.detailBtn:hover{
+  cursor: pointer;
+  transition: .5s;
+}
+#update{
+  background-color: #e0edc4;
+  border-radius: 5px;
+  color: #4B5C4E;
+}
+
+#update:hover{
+  box-shadow: #bac5a2 2px 2px;
+}
+
+#cancel{
+  border: 2px solid #e0edc4;
+  border-radius: 5px;
+  color: #e0edc4;
+  background: linear-gradient(to right, #e0edc4 50%, transparent 0%);
+  background-size: 300% 300%;
+  background-position: right;
+  transition: all .5s ease-in;
+}
+
+#cancel:hover{
+cursor: pointer;
+background-position: left;
+color: #354137;
+box-shadow: #bac5a2 2px 2px;
+}
+
+@media (max-width:1035px) {
+  .loginCard{
+    width: 50vw;
+  }
+
+  .loginInputButton{
+    min-width: 20vw;
+  }
+  .list{
+    flex-direction: column;
+    align-items:center;  
+  }
+  
+  .goalContainer{
+    width: 100%;
+  }
+}
+
+@media  (max-width:600px) {
+  .loginCard{
+    width: 75vw;
+  }
+
+  .pageTitleDiv{
+    font-size: 3rem;
+    height: 20vh;
+  }
+  .titleDiv{
+    height: 70px;
+  }
+
+  .titleText{
+    font-size: 1.3rem;
+  }
+
+  .detailsForm{
+    font-size: 1.1rem;
+  }
+
+  .reasonInput, .steppingStoneTitleText{
+    font-size: 1rem;
+  }
+
+    
+  .deadlineDiv, .dateInput{
+    font-size: .8rem;
+  }
+
+  .dateInput::-webkit-calendar-picker-indicator{
+    font-size: .6rem;
+  }
+
+  .detailBtn{
+    width: 5rem;
+    font-size: 1.2rem;
+  }
 
 }
