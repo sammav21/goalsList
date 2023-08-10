@@ -1,6 +1,6 @@
 @url = http://localhost:8080/api/steppingStone
 
-@token= eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnb2Fscy1saXN0Iiwic3ViIjoic2FsbHlAam9uZXMuY29tIiwiYXBwX3VzZXJfaWQiOjIsImF1dGhvcml0aWVzIjoiVVNFUiIsImV4cCI6MTY5MDQxNDI3MH0.Ux92AQaKdpQuFF5snQvkrdRzzJ1HyM1VLmcqxDYj8XI
+@token= eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnb2Fscy1saXN0Iiwic3ViIjoic2FsbHlAam9uZXMuY29tIiwiYXBwX3VzZXJfaWQiOjIsImF1dGhvcml0aWVzIjoiVVNFUiIsImV4cCI6MTY5MDU4Mzc2MH0.37h34xIpyIJmd8cWfAMyGRPlWn2VY3YENiCM6kN7xGA
 
 GET {{url}}/2 HTTP/1.1
 Authorization: Bearer {{token}}
@@ -32,7 +32,7 @@ Authorization: Bearer {{token}}
 
 ###
 
-DELETE {{url}}/4 HTTP/1.1
+DELETE {{url}}/5 HTTP/1.1
 Content-Type: application/json 
 Authorization: Bearer {{token}}
 

@@ -1,5 +1,5 @@
 @url = http://localhost:8080/api/goal
-@token= eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnb2Fscy1saXN0Iiwic3ViIjoic2FsbHlAam9uZXMuY29tIiwiYXBwX3VzZXJfaWQiOjIsImF1dGhvcml0aWVzIjoiVVNFUiIsImV4cCI6MTY5MDQxMTg0OH0.CbeRdPIlwNPyDXUGRfiytLIyrOgwISuVqgcQzcBcMMg
+@token= eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnb2Fscy1saXN0Iiwic3ViIjoic2FsbHlAam9uZXMuY29tIiwiYXBwX3VzZXJfaWQiOjIsImF1dGhvcml0aWVzIjoiVVNFUiIsImV4cCI6MTY5MTA0Mjg2NX0.JjRI1uTSgpKj1JoJGVzwzrLqhg3rLORUxipBbRr3mQs
 
 GET {{url}}/2 HTTP/1.1
 Authorization: Bearer {{token}}
@@ -26,6 +26,17 @@ Authorization: Bearer {{token}}
 
 ###
 
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "testttt",
+    "appUserId": 2
+}
+
+###
+
 PUT {{url}}/3 HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer {{token}}
@@ -42,7 +53,7 @@ Authorization: Bearer {{token}}
 
 ###
 
-DELETE {{url}}/5 HTTP/1.1
+DELETE {{url}}/7 HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
