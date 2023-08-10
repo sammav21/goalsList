@@ -1,22 +1,13 @@
-import { useContext } from "react"
 import GoalsList from "../components/ListedGoals/GoalsList"
 import PostData from "../components/PostData"
-import UserContext from "../context/UserContext"
+import TipsCard from "../components/TipsCard"
 
 export default function MainPage(props){
-    const authorities = useContext(UserContext);
-
-    const handleLogout = () => {
-        authorities.logout();
-    }
-    
     return(
     <>
-        <header>
-            <p className="logoutText" onClick={handleLogout}>Logout</p>
-        </header>
+        {props.tipsOpen  && <TipsCard />}
         <div className="pageTitleDiv">
-        <h1 className="pageTitle">Goals</h1>
+        <h3 className="goalPrompt">Set a goal</h3>
         </div>
         <form>
         <PostData refreshData={props.refreshData} isGoal={true}/>

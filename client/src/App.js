@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import jwtDecode from 'jwt-decode';
-import LoginPage from './layout/LoginPage';
 import MainPage from './layout/MainPage';
 import UserContext from './context/UserContext';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Nav from './layout/Nav';
+import LoginPage from './layout/LoginPage';
+import LandingPage from './layout/LandingPage';
 
 function App() {
 
@@ -11,7 +14,9 @@ function App() {
   const [user, setUser] = useState(null);
   const [goals, setGoals] = useState([]);
   const [reloadUser, setReloadUser] = useState(false);
-  {/*need another call for stepping stone related to goal id (here or in goal component?)*/}
+
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [tipsOpen, setTipsOpen] = useState(false);
 
   const login = (token) => {
     const {sub: username, app_user_id: userId, authorities: authoritiesString} = jwtDecode(token);
@@ -36,8 +41,7 @@ function App() {
   const logout = () =>{
     setUser(null);
     window.localStorage.removeItem("userToken");
-    window.location.reload(false);
-  }
+    }
 
   const authorities = {
     user: user ? {...user} : null,
@@ -67,10 +71,16 @@ function App() {
   }, [])
 
   return (
+    <BrowserRouter>
     <UserContext.Provider value={authorities}>
-    {user == null && <LoginPage />}
-    <MainPage refreshData={refreshData} goals={goals}/>
+      <Nav loginOpen={loginOpen} setLoginOpen={setLoginOpen} tipsOpen={tipsOpen} setTipsOpen={setTipsOpen}/>
+      {loginOpen && <LoginPage setLoginOpen={setLoginOpen} />}
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="goals" element={<MainPage refreshData={refreshData} goals={goals} tipsOpen={tipsOpen} setTipsOpen={setTipsOpen}/>} />
+      </Routes>
     </UserContext.Provider>
+    </BrowserRouter>
   );
 }
 

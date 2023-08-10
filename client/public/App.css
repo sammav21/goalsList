@@ -5,16 +5,18 @@
 }
 
 #root{
-  width: 100vw;
+  max-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2vw 4vw 0;
 }
 
 body{
   min-height: 100vh;
   background-image: linear-gradient(230deg, #558B6E, #E0EDC5);
   font-family: 'Poiret One', cursive;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   overflow-x: hidden;
 }
 
@@ -33,13 +35,101 @@ input,button{
   border: none;
 }
 
+/*nav*/
+.logo{
+  color: #e0edc4;
+  text-shadow: #2a332b 1px 1px;
+  flex: 1;
+}
+
+header{
+  width: 90vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logText, .tipLink{
+  font-size: 1.1rem;
+  color: #e0edc4;
+  padding: 3px;
+  border-bottom: 1px solid #e0edc4;
+  background: linear-gradient(to top, #e0edc4 50%, transparent 0%);
+  background-size: 200% 200%;
+  background-position: top;
+  transition: all .2s ease-in;
+}
+
+.logText:hover, .tipLink:hover{
+  cursor: pointer;
+  background-position: bottom;
+  border-radius: 5px;
+  color: #354137;
+}
+
+.tipLink{
+  margin-right: .7rem;
+}
+/*Landing Page*/
+
+.landingPageDiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3%;
+}
+
+.landingPageContent{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.introTextSection{
+  width: 85vw;
+  color: #2a332b;
+}
+
+.landingTipsSection{
+  width: 100vw;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.landingSubHead{
+  font-size: 5rem;
+}
+.landingAbout{
+  margin-top: 15px;
+  font-size: 2.5rem;
+}
+
+.landingTipCard{
+  width: 80vw;
+  margin: 10px 0px;
+  padding: 10px;
+  background-color:  #4a5a4c;
+  border-radius: 10px;
+  color: #c1cda9;
+  box-shadow: #3b483d 4px 4px;
+}
+
+.landingTipTitle{
+  font-size: 2.5rem;
+}
+
+.landingTipText{
+  font-size: 1.5rem;
+}
 /*loginCard*/
 
 .loginScreen{
   height: 100vh;
   width: 100vw;
   position: absolute;
-  left: 0;
+  right: 0;
   top: 0;
   z-index: 1;
   display: flex;
@@ -51,7 +141,7 @@ input,button{
 .loginCard{
   border-radius: 10px;
   width: 35vw;
-  height: 50vh;
+  height: 55vh;
   background-color: #E0EDC5;
   display: flex;
   flex-direction: column;
@@ -59,6 +149,16 @@ input,button{
   justify-content: center;
 }
 
+.loginClose{
+  width: 85%;
+  display: flex;
+  justify-content:end;
+  color:#354137;
+}
+
+.close:hover{
+  cursor: pointer;
+}
 .loginTitle{
   margin-bottom: 15px;
   font-family: 'Poiret One', cursive;
@@ -124,30 +224,6 @@ input,button{
 
 /*main page*/
 
-header{
-  position: absolute;
-  top: 2%;
-  right: 5%;
-}
-
-.logoutText{
-  font-size: 1.1rem;
-  color: #e0edc4;
-  padding: 3px;
-  border-bottom: 1px solid #e0edc4;
-  background: linear-gradient(to top, #e0edc4 50%, transparent 0%);
-  background-size: 200% 200%;
-  background-position: top;
-  transition: all .2s ease-in;
-}
-
-.logoutText:hover{
-  cursor: pointer;
-  background-position: bottom;
-  border-radius: 5px;
-  color: #354137;
-}
-
 .pageTitleDiv, .goalForm{
   display: flex;
   justify-content: center;
@@ -155,15 +231,12 @@ header{
   
 }
 .pageTitleDiv{
-  font-size: 3rem;
-  height: 25vh;
-  color:#4B5C4E;
-  text-shadow: -1px 0px #E0EDC5;
+  font-size: 2rem;
+  color:#2a332b;
+  margin-top: 20px;
 }
 
 .goalForm{
-  width: 85%;
-  border-top: #558B6E solid 1px;
   padding: 10px;
   border-radius: 50px;
   margin: auto;
@@ -205,7 +278,28 @@ header{
   cursor: pointer;
 }
 
+/*tip card*/
 
+.tipCard{
+  width: 80vw;
+  background-color: #2a332b;
+  border-radius: 20px;
+  color: #c1cda9;
+  top: 0;
+  margin-top: 10px;
+  padding: 10px 20px;
+}
+.tipDiv{
+  margin: 10px 0;
+}
+
+.tipTitle{
+  font-size: 1.5rem;
+}
+
+.tipText{
+  font-size: 1.2rem;
+}
 /*growing list section */
 .listSection{
   width: 85%;
@@ -514,14 +608,36 @@ box-shadow: #bac5a2 2px 2px;
 }
 
 @media  (max-width:600px) {
-  .loginCard{
-    width: 75vw;
+
+  .introTextSection{
+    width: 95vw;
   }
 
-  .pageTitleDiv{
-    font-size: 3rem;
-    height: 20vh;
+  .landingSubHead{
+    font-size: 4rem;
   }
+  .landingAbout{
+    margin-top: 10px;
+    font-size: 1.8rem;
+  }
+
+  .landingTipCard{
+    width: 90vw;
+  }
+  
+  .landingTipTitle{
+    font-size: 2.2rem;
+  }
+  
+  .landingTipText{
+    font-size: 1.5rem;
+  }
+
+  .loginCard{
+    width: 80vw;
+    height: 47vh;
+  }
+
   .titleDiv{
     height: 70px;
   }

@@ -4,7 +4,7 @@ export default function LoginPage(props){
 
     return(
         <div className="loginScreen">
-            <LoginCard />
+            <LoginCard setLoginOpen={props.setLoginOpen}/>
         </div>
     )
 }

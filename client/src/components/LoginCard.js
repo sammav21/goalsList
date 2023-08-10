@@ -1,13 +1,15 @@
 import { useContext, useState } from "react"
 import UserContext from "../context/UserContext";
 import Errors from "./Errors";
+import { useNavigate } from "react-router-dom";
 
-export default function LoginCard(){
+export default function LoginCard(props){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
     const [create, setCreate] = useState(false);
 
+    const navigate = useNavigate();
     const authorities = useContext(UserContext);
 
     const handleSubmit = async(e) => {
@@ -30,6 +32,8 @@ export default function LoginCard(){
             window.localStorage.setItem("userToken", jwt_token);
             clearFields();
             setCreate(false);
+            props.setLoginOpen(false);
+            navigate("/goals");
         } else if(response.status === 403){
             setErrors(["User not found, try again."])
             console.log(errors)
@@ -72,6 +76,7 @@ export default function LoginCard(){
 
     return(
         <div className="loginCard">
+            <div className="loginClose"><i className="fa-solid fa-xmark close" onClick={() => props.setLoginOpen(false)}></i></div>
             <h3 className="loginTitle">{create ? "Create account" : "Login"}</h3>
             <form onSubmit={create ? handleCreateAccount : handleSubmit} className="loginForm">
                 <div className="loginInputSection">
@@ -80,7 +85,7 @@ export default function LoginCard(){
                 </div>
                 <div className="loginInputSection">
                     <label htmlFor="passwordInput">Password </label>
-                    <input className="loginInput" id="passwordInput" value={password} type="text" onChange={(e) => setPassword(e.target.value)} />
+                    <input className="loginInput" id="passwordInput" value={password} type="password" onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <Errors errors={errors}/>
                 <div className="loginButton">
