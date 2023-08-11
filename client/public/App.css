@@ -89,6 +89,7 @@ header{
 .introTextSection{
   width: 85vw;
   color: #2a332b;
+  animation: fadeIn 3s;
 }
 
 .landingTipsSection{
@@ -101,28 +102,17 @@ header{
 .landingSubHead{
   font-size: 5rem;
 }
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
 .landingAbout{
   margin-top: 15px;
   font-size: 2.5rem;
 }
 
-.landingTipCard{
-  width: 80vw;
-  margin: 10px 0px;
-  padding: 10px;
-  background-color:  #4a5a4c;
-  border-radius: 10px;
-  color: #c1cda9;
-  box-shadow: #3b483d 4px 4px;
-}
 
-.landingTipTitle{
-  font-size: 2.5rem;
-}
-
-.landingTipText{
-  font-size: 1.5rem;
-}
 /*loginCard*/
 
 .loginScreen{

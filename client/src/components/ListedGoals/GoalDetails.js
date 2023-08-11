@@ -39,6 +39,7 @@ export default function GoalDetails(props){
           props.refreshData();
           setUpdatedFields(template);
           setErrors([]);
+          props.setOpenDetails(null);
         } else{
           const error = await response.json();
           setErrors(error);
