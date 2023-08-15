@@ -9,7 +9,7 @@ import LandingPage from './layout/LandingPage';
 
 function App() {
 
-  const url = "http://localhost:8080/api";
+  const url = "http://162.241.253.186/api";
 
   const [user, setUser] = useState(null);
   const [goals, setGoals] = useState([]);
