@@ -5,7 +5,9 @@ export default function SteppingStone(props){
 
     const authorities = useContext(UserContext);
 
-    const handleDelete = async () => {
+    const handleDelete = async (e) => {
+        e.preventDefault();
+        
         const response = await fetch(`${authorities.url}/steppingStone/${props.steppingStone.steppingStoneId}`, {
             method: "DELETE",
             headers: {
@@ -13,7 +15,9 @@ export default function SteppingStone(props){
                 Authorization: `Bearer ${authorities.user.token}`
             }
         })
+        if(response.status >= 200 && response.status <= 300){
         props.refreshSteppingStones();
+        }
     }
 
     const handleChecked = async (e) => {

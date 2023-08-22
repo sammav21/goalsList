@@ -12,7 +12,9 @@ export default function GoalTitle(props){
                 "Authorization": `Bearer ${authorities.user.token}`
               }
         })
+        if(response.status >= 200 && response.status <= 300){
             props.refreshData();
+        }
     }
 
     const handleChecked = async (e) => {

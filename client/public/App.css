@@ -131,7 +131,8 @@ header{
 .loginCard{
   border-radius: 10px;
   width: 35vw;
-  height: 55vh;
+  min-height: 55vh;
+  padding: 1rem;
   background-color: #E0EDC5;
   display: flex;
   flex-direction: column;
@@ -210,6 +211,15 @@ header{
 
 .loginInputButton:hover, .createAccountButton:hover{
   cursor: pointer;
+}
+/*loading*/
+.loading{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 4rem;
+  color:#354137;
 }
 
 /*main page*/
