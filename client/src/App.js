@@ -9,11 +9,10 @@ import LandingPage from './layout/LandingPage';
 
 function App() {
 
-  const url = "http://162.241.253.186/api";
+  const url = "http://localhost:8080/api";
 
   const [user, setUser] = useState(null);
   const [goals, setGoals] = useState([]);
-  const [reloadUser, setReloadUser] = useState(false);
 
   const [loginOpen, setLoginOpen] = useState(false);
   const [tipsOpen, setTipsOpen] = useState(false);
@@ -67,7 +66,6 @@ function App() {
     if(localStorage.getItem("userToken") != null){
       login(localStorage.getItem("userToken"))
     }
-    setReloadUser(true)
   }, [])
 
   return (
